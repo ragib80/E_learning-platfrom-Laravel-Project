@@ -19,13 +19,18 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/login', ['uses' => 'LoginController@index']);
+Route::get('/login',['uses'=>'LoginController@index'])->name('login.index'); 
 
-Route::post('/login', 'LoginController@verify');
+Route::post('/login','LoginController@verify');
+
+Route::get('/logout', 'LogoutController@index');
 
 Route::get('/home', 'HomeController@index');
 
 Route::get('/note', 'NoteController@index');
+
+Route::get('/registration','RegistrationController@index')->name('registration.index');
+Route::post('/registration','RegistrationController@verify');
 
 Route::get('/profile', 'ProfileController@index');
 
@@ -47,7 +52,7 @@ Route::get('/instructor/edit', 'InstructorController@edit')->name('instructor.ed
 
 Route::get('/admin', 'AdminController@index')->name('admin.index');
 Route::get('/admin/create', 'AdminController@create')->name('admin.student');
-Route::get('/registration', 'RegistrationController@index');
+
 /*function () {
     //echo "it works...";
    // return view('login.index');
