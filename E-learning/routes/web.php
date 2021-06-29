@@ -57,7 +57,8 @@ Route::get('/admin/student/edit/{id}', 'AdminController@edit')->name('student.ed
 Route::post('/admin/student/edit/{id}', 'AdminController@updateStudent');
 Route::get('/admin/student/delete/{id}', 'AdminController@deleteStudent')->name('student.delete');
 Route::post('/admin/student/delete/{id}', 'AdminController@destroy');
-Route::get('/admin/student/list/download_student_data', 'SalesController@sheet')->name('student.sheet');
+Route::get('/admin/student/list/download_student_data', 'AdminController@sheet')->name('student.sheet');
+Route::get('/admin/student/list/search', 'AdminController@search')->name('student.search');
 
 /*function () {
     //echo "it works...";

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Student;
 use App\Exports\StudentsExport;
+use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Facades\DB;
 
 class AdminController extends Controller
 {
@@ -77,81 +79,46 @@ class AdminController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function physical()
+
+
+    public function search(Request $request)
     {
+        if ($request->ajax()) {
+            $students =
+                Student::where('st_name', 'LIKE', $request->search . '%')
+                ->get();
 
-        $sales_today = Product::where('status', 'sold')
-            ->where('channel', 'physical')
-            ->where('date_sold', Carbon::now()->toDateString())
-            ->count();
+            $output =
+                '<tr class="table-info table-sm">' .
+                '<td>' . 'Student ID' . '</td>' .
+                '<td>' . 'Student Name' . '</td>' .
+                '<td>' . 'Student Email' . '</td>' .
+                '<td>' . 'Student Address' . '</td>' .
 
-        $sales_week = Product::where('status', 'sold')
-            ->where('channel', 'physical')
-            ->whereBetween('date_sold', [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()])
-            ->count();
-        $avg_sales = Product::where('status', 'sold')
-            ->where('channel', 'physical')
-            ->whereYear('date_sold', Carbon::now()->year)
-            ->whereMonth('date_sold', Carbon::now()->month)
-            ->avg('quantity');
+                '</tr>';
 
-        $most_sales = Product::select('product_name')
-            ->where('channel', 'physical')
-            ->groupBy('product_name')
-            ->orderByRaw('COUNT(*) DESC')
-            ->limit(1)
-            ->get();
+            if (count($students) > 0) {
+                if ($students) {
+                    foreach ($students as $key => $student) {
+                        $output .= '<tr>' .
+                            '<td>' . $student->st_id . '</td>' .
+                            '<td>' . $student->st_name . '</td>' .
+                            '<td>' . $student->email . '</td>' .
+                            '<td>' . $student->address . '</td>' .
+                            '<td>' . '<a class="btn btn-info" href="route("student.details", ["id" => ' . $student->st_id . '])">' . 'Details' . '</a>' . '</td>' . '|' .
+                            '</tr>';
+                    }
+                    return Response($output);
+                } else {
 
-
-        $product = DB::table('products')
-            ->where('channel', 'physical')
-            ->orderBy('date_sold', 'desc')
-            ->get();
-
-        return view('sales.physical')->with('productList', $product)
-            ->with('sales_today', $sales_today)
-            ->with('sales_week', $sales_week)
-            ->with('avg_sales', $avg_sales)
-            ->with('most_sales', $most_sales);
+                    $output .= '<li class="list-group-item">' . 'No results' . '</li>';
+                }
+            }
+        }
     }
 
-    public function social()
-    {
-
-        $sales_today = Product::where('status', 'sold')
-            ->where('channel', 'social')
-            ->where('date_sold', Carbon::now()->toDateString())
-            ->count();
-
-        $sales_week = Product::where('status', 'sold')
-            ->where('channel', 'social')
-            ->whereBetween('date_sold', [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()])
-            ->count();
-        $avg_sales = Product::where('status', 'sold')
-            ->where('channel', 'social')
-            ->whereYear('date_sold', Carbon::now()->year)
-            ->whereMonth('date_sold', Carbon::now()->month)
-            ->avg('quantity');
-
-        $most_sales = Product::select('product_name')
-            ->where('channel', 'social')
-            ->groupBy('product_name')
-            ->orderByRaw('COUNT(*) DESC')
-            ->limit(1)
-            ->get();
 
 
-        $product = DB::table('products')
-            ->where('channel', 'social')
-            ->orderBy('date_sold', 'desc')
-            ->get();
-
-        return view('sales.social')->with('productList', $product)
-            ->with('sales_today', $sales_today)
-            ->with('sales_week', $sales_week)
-            ->with('avg_sales', $avg_sales)
-            ->with('most_sales', $most_sales);
-    }
 
 
     public function data(Request $req)
@@ -197,8 +164,9 @@ class AdminController extends Controller
 
     public function sheet()
     {
-        return (new StudentsExport())->download('students.xlsx');
+        return Excel::download(new StudentsExport, 'students.xlsx');
     }
+
     //
 
     /**
