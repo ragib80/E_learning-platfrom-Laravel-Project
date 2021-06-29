@@ -19,9 +19,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/login',['uses'=>'LoginController@index'])->name('login.index'); 
+Route::get('/login', ['uses' => 'LoginController@index'])->name('login.index');
 
-Route::post('/login','LoginController@verify');
+Route::post('/login', 'LoginController@verify');
 
 Route::get('/logout', 'LogoutController@index');
 
@@ -29,8 +29,8 @@ Route::get('/home', 'HomeController@index');
 
 Route::get('/note', 'NoteController@index');
 
-Route::get('/registration','RegistrationController@index')->name('registration.index');
-Route::post('/registration','RegistrationController@verify');
+Route::get('/registration', 'RegistrationController@index')->name('registration.index');
+Route::post('/registration', 'RegistrationController@verify');
 
 Route::get('/profile', 'ProfileController@index');
 
@@ -44,7 +44,7 @@ Route::get('/courses/create', 'CourseController@create');
 Route::get('/courses/delete', 'CourseController@delete')->name('course.delete');
 Route::get('/courses/edit', 'CourseController@edit')->name('course.edit');
 
-Route::get('/instructor/list', 'InstructorController@index');
+Route::get('/instructor/list', 'InstructorController@index')->name('instructor.index');
 Route::get('/instructor/create', 'InstructorController@create');
 Route::get('/instructor/delete', 'InstructorController@delete')->name('instructor.delete');
 Route::get('/instructor/edit', 'InstructorController@edit')->name('instructor.edit');;
