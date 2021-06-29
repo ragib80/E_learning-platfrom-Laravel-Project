@@ -51,7 +51,8 @@ Route::get('/instructor/edit', 'InstructorController@edit')->name('instructor.ed
 
 
 Route::get('/admin', 'AdminController@index')->name('admin.index');
-Route::get('/admin/create', 'AdminController@create')->name('admin.student');
+Route::get('/admin/student/list', 'AdminController@list')->name('student.list');
+Route::get('/admin/student/details/{id}', 'AdminController@details')->name('student.details');
 
 /*function () {
     //echo "it works...";

@@ -72,18 +72,18 @@
                     </a>
                 </li>
                 <li class="">
-                    <a href="/Instrictor">
+                    <a href="/Instructor">
                         <i class="now-ui-icons design_bullet-list-67"></i>
-                        <p>Instructort List</p>
+                        <p>Instructor List</p>
                     </a>
                 </li>
-                <li class="active">
-                    <a href="{route('admin.student')}}{">
+                <li>
+                    <a href="{{route('student.list')}}">
                         <i class="now-ui-icons design_bullet-list-67"></i>
-                        <p>Instructort List</p>
+                        <p>Student List</p>
                     </a>
                 </li>
-                <li class="active">
+                <li>
                     <a href="/stuff">
                         <i class="now-ui-icons design_bullet-list-67"></i>
                         <p>Stuff List</p>
@@ -95,7 +95,7 @@
                         <p>Typography</p>
                     </a>
                 </li>
-                <li class="active-pro">
+                <li>
                     <a href="/home">
                         <i class="now-ui-icons arrows-1_cloud-download-93"></i>
                         <p>Logout</p>
@@ -214,6 +214,12 @@
                 </div>
             </div>
         </div>
+
+
+
+
+
+
 
 
 

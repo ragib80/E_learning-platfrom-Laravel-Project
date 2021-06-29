@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Student;
 
 class AdminController extends Controller
 {
@@ -22,9 +23,15 @@ class AdminController extends Controller
         //
     }
 
-    public function create()
+    public function list()
     {
-        return view('student.create');
+        $students = Student::all();
+        return view('admin.student.list')->with('students', $students);
+    }
+    public function details($id)
+    {
+        $students = Student::find($id);
+        return view('admin.student.details')->with('student', $students);
     }
 
     /**
