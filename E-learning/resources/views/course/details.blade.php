@@ -49,7 +49,7 @@
             </a>
           </li>
           <li>
-            <a href="/instructor/list">
+            <a href="/intractor">
               <i class="now-ui-icons location_map-big"></i>
               <p>Instractor</p>
             </a>
@@ -89,69 +89,56 @@
     </div>
     <div class="main-panel" id="main-panel">
    
-   <div id="wrapper">
-   
-       <div class="content">
-       <div class="row">
-         <div class="col-md-12">
-           
-       <div id="main-content">
-       <nav class="navbar navbar-light bg-light">
- <a class="navbar-brand"> </a>
+    <div id="wrapper">
+    
+        <div class="content">
+        <div class="row">
+          <div class="col-md-12">
+            
+        <div id="main-content">
+        <nav class="navbar navbar-light bg-light">
+  <a class="navbar-brand"> </a>
+  <a class="btn btn-info" href="/courses/list"> Course Index</a>
+  
+  <form class="form-inline">
 
+    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+  </form>
 </nav>
-   <!-- Page Heading -->
-   <h1 class="h3 mb-4 text-gray-800"> Course Management</h1>
 
-<!-- DataTales Example -->
-<span id="message"></span>
-<div class="card shadow mb-4">
-   <div class="card-header py-3">
-     <div class="row">
-         <div class="col">
-           <h6 class="m-0 font-weight-bold text-primary">Course List</h6>
-         </div>
-         <div class="col" align="center">
-         
-         <a class="btn btn-secondary" href="/courses/create"> Add Course </a> |
-         <a class="btn btn-success" href="/search">Search Course</a>
-         </div>
-       </div>
-   </div>
-   <div class="card-body">
-       <div class="table-responsive">
-           <table class="table table-bordered" id="class_table" width="100%" cellspacing="0">
-           <tr class="table-info">
-           <td>Course ID </td>
-           <td>Course Name </td>
-           <td>Course Thumnil </td>
-           <td> Course Status </td>
+<div id="main-content" class="main">
+
+
+
+    <h1>Course Details </h1>
+    <table cellpadding="7px" class="table table-striped">
+    <tr class="table-info">
+            <td>Course ID </td>
+            <td>Course Name </td>
+            <td>Course Thumnil </td>
+            <td> Course Status </td>
+            
+            
+        </tr>
+
+       
+        <tr>
+
+            <td>{{$course->c_id}}</td>
+            <td>{{$course->c_name}}</td>
+            <td>{{$course->img}}</td>
+            <td>{{$course->status}}</td>
            
-           <td> Action </td>
-       </tr>
+  
+        </tr>
+        
+    </table>
+    <a class="btn btn-danger" href="">Edit Info</a>
 
-     
-       <tr>
-
-       <td>01</td>
-           <td>ACN</td>
-           <td>ABC</td>
-           <td>Active</td>
-          
-   <td>
-
-               
-               <a class="btn btn-info" href="/courses/details"> Details </a> |
-               <a  class="btn btn-warning" href="/courses/edit"> Edit </a> |
-               <a class="btn btn-danger" href="/courses/delete"> Delete </a> |
-           </>
-       </tr>
-      
-              
-           </table>
-       </div>
-   </div>
-</div>
-
+    </div>
 </body>
+
+
+
 </html>

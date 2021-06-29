@@ -50,9 +50,9 @@
             </a>
           </li>
           <li>
-            <a href="/instructor/list">
+          <a href="/instractor">
               <i class="now-ui-icons location_map-big"></i>
-              <p>instructor</p>
+              <p>Instractor</p>
             </a>
           </li>
           <li>
@@ -74,7 +74,7 @@
             </a>
           </li>
           <li>
-            <a href="./typography.html">
+            <a href="/supportstaff">
               <i class="now-ui-icons text_caps-small"></i>
               <p>Support Staff</p>
             </a>
@@ -93,7 +93,7 @@
     <div id="wrapper">
     
         <div id="header">
-            <h1>Student Index</h1>
+            <h1>Support Staff Index</h1>
         </div>
         <div id="menu">
         

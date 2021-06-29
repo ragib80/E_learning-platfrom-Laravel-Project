@@ -50,9 +50,9 @@
             </a>
           </li>
           <li>
-            <a href="/note">
+            <a href="/instructor/list">
               <i class="now-ui-icons location_map-big"></i>
-              <p>Notes</p>
+              <p>Instractor</p>
             </a>
           </li>
           <li>
@@ -74,13 +74,13 @@
             </a>
           </li>
           <li>
-            <a href="/typography.html">
+            <a href="/supportstaff">
               <i class="now-ui-icons text_caps-small"></i>
-              <p>Typography</p>
+              <p>Support Staff</p>
             </a>
           </li>
           <li class="active-pro">
-            <a href="/home">
+            <a href="/logout">
               <i class="now-ui-icons arrows-1_cloud-download-93"></i>
               <p>Log Out</p>
             </a>

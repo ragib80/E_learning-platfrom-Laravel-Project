@@ -4,11 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class CourseController extends Controller
+class InstructorController extends Controller
 {
     public function index(){
         
-           return view('course.list');
+           return view('instractor.list');
        
     }
     public function verify(){
@@ -18,22 +18,22 @@ class CourseController extends Controller
     {
         
   
-        return view('course.details')->with('course', $course);
+        return view('instractor.details');
     }
     public function create(){
-        return view('course.create');
+        return view('instractor.create');
     }
     public function edit()
     {
        
-        return view('course.edit');
+        return view('instractor.edit');
     }
     public function delete()
     {
     
-        return view('course.delete');
+        return view('instractor.delete');
     }
     public function search(){
-        return view('course.search');
+        return view('instractor.search');
     }
 }

@@ -49,7 +49,7 @@
             </a>
           </li>
           <li>
-            <a href="/instructor/list">
+            <a href="/intractor">
               <i class="now-ui-icons location_map-big"></i>
               <p>Instractor</p>
             </a>
@@ -88,70 +88,57 @@
       </div>
     </div>
     <div class="main-panel" id="main-panel">
-   
-   <div id="wrapper">
-   
-       <div class="content">
-       <div class="row">
-         <div class="col-md-12">
-           
-       <div id="main-content">
-       <nav class="navbar navbar-light bg-light">
- <a class="navbar-brand"> </a>
+    <div id="wrapper">
+    
+        <div class="content">
+        <div class="row">
+          <div class="col-md-12">
+            
+        <div id="main-content">
+        <nav class="navbar navbar-light bg-light">
+  <a class="navbar-brand"> </a>
+  <a class="btn btn-info" href="/courses/list"> Course Index</a>
+  
+  <form class="form-inline">
 
+    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+  </form>
 </nav>
-   <!-- Page Heading -->
-   <h1 class="h3 mb-4 text-gray-800"> Course Management</h1>
 
-<!-- DataTales Example -->
-<span id="message"></span>
-<div class="card shadow mb-4">
-   <div class="card-header py-3">
-     <div class="row">
-         <div class="col">
-           <h6 class="m-0 font-weight-bold text-primary">Course List</h6>
-         </div>
-         <div class="col" align="center">
-         
-         <a class="btn btn-secondary" href="/courses/create"> Add Course </a> |
-         <a class="btn btn-success" href="/search">Search Course</a>
-         </div>
-       </div>
-   </div>
-   <div class="card-body">
-       <div class="table-responsive">
-           <table class="table table-bordered" id="class_table" width="100%" cellspacing="0">
-           <tr class="table-info">
-           <td>Course ID </td>
-           <td>Course Name </td>
-           <td>Course Thumnil </td>
-           <td> Course Status </td>
-           
-           <td> Action </td>
-       </tr>
+<div id="main-content" class="main">
 
-     
-       <tr>
 
-       <td>01</td>
-           <td>ACN</td>
-           <td>ABC</td>
-           <td>Active</td>
-          
-   <td>
 
-               
-               <a class="btn btn-info" href="/courses/details"> Details </a> |
-               <a  class="btn btn-warning" href="/courses/edit"> Edit </a> |
-               <a class="btn btn-danger" href="/courses/delete"> Delete </a> |
-           </>
-       </tr>
+    <h1>Course Details </h1>
+    <form class="post-form"  method="post">
+    @csrf
+      <div class="form-group">
+          <label class="col-sm-2 col-form-label">Name</label>
+          <input type="hidden" name="id" value=""/>
+          <input type="text" name="c_name" value="">
+      </div>
+      <div class="form-group">
+          <label class="col-sm-2 col-form-label">Course Thumbnil</label>
+          <input type="text" name="img" value=""/>
+      </div>
       
-              
-           </table>
-       </div>
-   </div>
-</div>
+      <div class="form-group">
+          <label class="col-sm-2 col-form-label">Status</label>
+          <select id="cars" name="status">
+  <option value="1">1</option>
+  <option value="0">0</option>
+  
+</select>
+          
+      </div>
+      <input class="btn btn-success" type="submit" name="Submit" value="Save">
+    </form>
+    
 
+    </div>
 </body>
+
+
+
 </html>
