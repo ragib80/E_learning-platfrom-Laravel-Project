@@ -53,6 +53,11 @@ Route::get('/instructor/edit', 'InstructorController@edit')->name('instructor.ed
 Route::get('/admin', 'AdminController@index')->name('admin.index');
 Route::get('/admin/student/list', 'AdminController@list')->name('student.list');
 Route::get('/admin/student/details/{id}', 'AdminController@details')->name('student.details');
+Route::get('/admin/student/edit/{id}', 'AdminController@edit')->name('student.edit');
+Route::post('/admin/student/edit/{id}', 'AdminController@updateStudent');
+Route::get('/admin/student/delete/{id}', 'AdminController@deleteStudent')->name('student.delete');
+Route::post('/admin/student/delete/{id}', 'AdminController@destroy');
+Route::get('/admin/student/list/download_student_data', 'SalesController@sheet')->name('student.sheet');
 
 /*function () {
     //echo "it works...";

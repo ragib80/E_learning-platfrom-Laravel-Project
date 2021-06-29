@@ -7,7 +7,7 @@
     <link rel="icon" type="image/png" href="/img/favicon.png">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <title>
-        Instracture Dashboard
+        Admin Dashboard
     </title>
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no'
         name='viewport' />
@@ -124,8 +124,11 @@
                                             <h6 class="m-0 font-weight-bold text-primary">Student List</h6>
                                         </div>
                                         <div class="col" align="center">
-
-                                            <a class="btn btn-secondary" href="/instructor/create"> Add Instructor </a>
+                                            <a href="{{route('student.sheet')}}"><button class="btn"><i
+                                                        class="fa fa-download"></i>Download Sales
+                                                    Report</button></a>
+                                            <a class="btn btn-secondary" href="/instructor/create">Download Student
+                                                List</a>
                                             |
                                             <a class="btn btn-success" href="/search">Search Instructor</a>
                                         </div>
@@ -155,8 +158,12 @@
                                                         href="{{route('student.details', ['id' => $student->st_id])}}">
                                                         Details </a>
                                                     |
-                                                    <a class="btn btn-warning" href="/instructor/edit"> Edit </a> |
-                                                    <a class="btn btn-danger" href="/instructor/delete"> Delete </a>
+                                                    <a class="btn btn-warning"
+                                                        href="{{route('student.edit', ['id' => $student->st_id])}}">
+                                                        Edit </a> |
+                                                    <a class=" btn btn-danger"
+                                                        href="{{route('student.delete', ['id' => $student->st_id])}}">
+                                                        Delete </a>
                                                     |
                                                 </td>
                                             </tr>
@@ -199,6 +206,18 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
 </body>
+
 
 </html>

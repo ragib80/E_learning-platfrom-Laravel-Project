@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Student;
+use App\Exports\StudentsExport;
 
 class AdminController extends Controller
 {
@@ -33,6 +34,43 @@ class AdminController extends Controller
         $students = Student::find($id);
         return view('admin.student.details')->with('student', $students);
     }
+
+    public function edit($id)
+    {
+        $students = Student::find($id);
+        return view('admin.student.edit')->with('student', $students);
+    }
+
+    public function updateStudent(Request $req, $id)
+    {
+        $student = Student::find($id);
+        $student->st_name = $req->name;
+        // $user->password = $req->password;
+        $student->email = $req->email;
+        $student->p_num = $req->phone;
+        $student->c_id = $req->course_id;
+        $student->address = $req->address;
+        // $user->type = $req->type;
+        $student->save();
+        return redirect()->route('student.list');
+        // return view('user.list')->with('userList', $users);
+    }
+    public function deleteStudent($id)
+    {
+
+        $student = Student::find($id);
+        return view('admin.student.delete')->with('student', $student);
+    }
+
+
+    public function destroy(Request $req, $id)
+    {
+
+        Student::destroy($id);
+        return redirect()->route('student.list');
+    }
+
+
 
     /**
      * Show the form for creating a new resource.
@@ -114,80 +152,7 @@ class AdminController extends Controller
             ->with('avg_sales', $avg_sales)
             ->with('most_sales', $most_sales);
     }
-    public function ecommerce()
-    {
 
-        $sales_today = Product::where('status', 'sold')
-            ->where('channel', 'ecommerce')
-            ->where('date_sold', Carbon::now()->toDateString())
-            ->count();
-
-        $sales_week = Product::where('status', 'sold')
-            ->where('channel', 'ecommerce')
-            ->whereBetween('date_sold', [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()])
-            ->count();
-        $avg_sales = Product::where('status', 'sold')
-            ->where('channel', 'ecommerce')
-            ->whereYear('date_sold', Carbon::now()->year)
-            ->whereMonth('date_sold', Carbon::now()->month)
-            ->avg('quantity');
-
-        $most_sales = Product::select('product_name')
-            ->where('channel', 'ecommerce')
-            ->groupBy('product_name')
-            ->orderByRaw('COUNT(*) DESC')
-            ->limit(1)
-            ->get();
-
-
-        $product = DB::table('products')
-            ->where('channel', 'ecommerce')
-            ->orderBy('date_sold', 'desc')
-            ->get();
-
-        return view('sales.ecommerce')->with('productList', $product)
-            ->with('sales_today', $sales_today)
-            ->with('sales_week', $sales_week)
-            ->with('avg_sales', $avg_sales)
-            ->with('most_sales', $most_sales);
-    }
-
-    public function log()
-    {
-
-        return view('sales.sales_log');
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(ProductRequest $req)
-    {
-
-        $product = new Product;
-        $product->customer_name = $req->fullname;
-        $product->address = $req->address;
-        $product->phone = $req->phone;
-        $product->product_name = $req->productname;
-        $product->product_id = $req->productid;
-        $product->quantity = $req->quantity;
-        $product->unit_price = $req->unitprice;
-        $product->total_price = $req->totalprice;
-        $product->status = 'pending';
-        $product->payment_type = 'pending';
-        $product->channel = 'physical';
-        $product->date_sold = '2019/10/10';
-        // $product->update_time = '';
-
-
-        // $product->profile_img = '';
-        $product->save();
-        $req->session()->flash('msg', 'Product Registration Successful');
-        return redirect()->route('sales.physical');
-    }
 
     public function data(Request $req)
     {
@@ -229,9 +194,10 @@ class AdminController extends Controller
             return redirect()->route('sales.log');
         }
     }
-    public function export()
+
+    public function sheet()
     {
-        return (new ProductsExport(06))->download('invoices.xlsx');
+        return (new StudentsExport())->download('students.xlsx');
     }
     //
 
@@ -252,10 +218,7 @@ class AdminController extends Controller
      * @param  \App\Models\Sales  $sales
      * @return \Illuminate\Http\Response
      */
-    public function edit(Sales $sales)
-    {
-        //
-    }
+
 
     /**
      * Update the specified resource in storage.
@@ -275,8 +238,4 @@ class AdminController extends Controller
      * @param  \App\Models\Sales  $sales
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Sales $sales)
-    {
-        //
-    }
 }

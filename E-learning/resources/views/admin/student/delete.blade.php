@@ -126,33 +126,27 @@
                                         <div class="card-header bg-white border-0">
                                             <div class="row align-items-center">
                                                 <div class="col-8">
-                                                    <h3 class="mb-0">Edit Student</h3>
+                                                    <h3 class="mb-0">Student Information</h3>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="card-body">
                                             <form method="post">
-                                                <h6 class="heading-small text-muted mb-4">Student information</h6>
                                                 <div class="pl-lg-4">
                                                     <div class="row">
                                                         <div class="col-lg-6">
                                                             <div class="form-group focused">
                                                                 <label class="form-control-label"
                                                                     for="input-username">Name</label>
-                                                                <input type="text" name="name" id="name"
-                                                                    class="form-control form-control-alternative"
-                                                                    placeholder="Student Name"
-                                                                    value="{{$student->st_name}}">
+                                                                <h3> {{$student->st_name}} </h3>
                                                             </div>
                                                         </div>
                                                         <div class="col-lg-6">
                                                             <div class="form-group">
                                                                 <label class="form-control-label"
-                                                                    for="input-email">Email address</label>
-                                                                <input type="text" name="email" id="email"
-                                                                    class="form-control form-control-alternative"
-                                                                    placeholder="example@example.com"
-                                                                    value="{{$student->email}}">
+                                                                    for="input-email">Email
+                                                                    address</label>
+                                                                <h3> {{$student->email}} </h3>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -161,19 +155,15 @@
                                                             <div class="form-group focused">
                                                                 <label class="form-control-label"
                                                                     for="input-first-name">Phone</label>
-                                                                <input type="text" name="phone" id="input-first-name"
-                                                                    class="form-control form-control-alternative"
-                                                                    placeholder="Phone" value="{{$student->p_num}}">
+                                                                <h3> {{$student->p_num}} </h3>
                                                             </div>
                                                         </div>
                                                         <div class="col-lg-6">
                                                             <div class="form-group focused">
-                                                                <label class="form-control-label"
-                                                                    for="input-last-name">Course ID</label>
-                                                                <input type="text" name="course_id" id="course_id"
-                                                                    class="form-control form-control-alternative"
-                                                                    placeholder="Enrolled Course ID"
-                                                                    value="{{$student->c_id}}">
+                                                                <label class="form-control-label" for="course">
+                                                                    Enrolled
+                                                                    Course</label>
+                                                                <h3> {{$student->c_id}} </h3>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -187,36 +177,28 @@
                                                             <div class="form-group focused">
                                                                 <label class="form-control-label"
                                                                     for="input-address">Address</label>
-                                                                <input id="input-address" name="address"
-                                                                    class="form-control form-control-alternative"
-                                                                    placeholder="Home Address"
-                                                                    value="{{$student->address}}" type="text">
+
+                                                                <h3> {{$student->address}} </h3>
                                                             </div>
                                                         </div>
 
-                                                    </div>
-                                                </div>
-                                                <button class="btn btn-info">Save</button>
 
-       
-                                         <a class="btn btn-info" href="{{route('student.list')}}">Back</a>
+                                                    </div>
+                                                    <button class="btn btn-danger">Delete</button>
+                                                    <a class="btn btn-info" href="{{route('student.list')}}">Back</a>
+                                            </form>
 
                                         </div>
-
-
-                                        </form>
                                     </div>
                                 </div>
+
                             </div>
-                        </div>
+
+
+       
+                 </div>
                     </div>
-
-                </div>
-
-            </div>
-        </div>
 </body>
-
 
 
 
