@@ -24,7 +24,7 @@ class LoginRequest extends FormRequest
     public function rules()
     {
         return [
-            'uname' => 'required',
+            'email' => 'required',
             'password' => 'required|min:5'
         ];
     }
@@ -32,9 +32,8 @@ class LoginRequest extends FormRequest
     public function messages()
     {
         return [
-            'uname.required' => 'Username Cant be empty..',
+            'email.required' => 'Username Cant be empty..',
             'password.min' => 'Password at least 5 charecter..',
         ];
     }
-   
 }

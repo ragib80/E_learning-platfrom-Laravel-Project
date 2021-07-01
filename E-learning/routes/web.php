@@ -1,8 +1,10 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
+
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\LoginController;
 use Illuminate\Http\Request;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -15,15 +17,17 @@ use Illuminate\Http\Request;
 |
 */
 
+Route::get('login/{provider}', 'Auth\LoginController@redirectToProvider');
+Route::get('{provider}/callback', 'Auth\LoginController@handleProviderCallback');
+
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('login/', 'LoginController@index')->name('login');
+Route::post('login/', 'Auth\LoginController@login');
 
-Route::get('/login', ['uses' => 'LoginController@index'])->name('login.index');
-
-Route::post('/login', 'LoginController@verify');
-
-Route::get('/logout', 'LogoutController@index');
+Route::get('logout/', 'Auth\LoginController@index')->name('logout');;
+Route::post('logout/', 'Auth\LoginController@logout');
 
 Route::get('/home', 'HomeController@index');
 
@@ -37,7 +41,7 @@ Route::get('/profile', 'ProfileController@index');
 Route::get('/dashboard', 'DashBoardController@index');
 Route::get('/student', 'StudentController@index');
 
-Route::get('/instructor', 'InstractorController@index');
+Route::get('/instructor', 'InstructorController@index');
 Route::get('/supportstaff', 'SupportstaffController@index');
 Route::get('/courses/list', 'CourseController@index');
 Route::get('/courses/create', 'CourseController@create');
@@ -60,7 +64,12 @@ Route::post('/admin/student/delete/{id}', 'AdminController@destroy');
 Route::get('/admin/student/list/download_student_data', 'AdminController@sheet')->name('student.sheet');
 Route::get('/admin/student/list/search', 'AdminController@search')->name('student.search');
 
+
+
 /*function () {
     //echo "it works...";
    // return view('login.index');
 });*/
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
