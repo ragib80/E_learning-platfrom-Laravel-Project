@@ -70,7 +70,7 @@
                         <p>User Profile</p>
                     </a>
                 </li>
-                <li class="active">
+                <li>
                     <a href="{{route('instructor.list')}}">
                         <i class="now-ui-icons design_bullet-list-67"></i>
                         <p>Instructor List</p>
@@ -79,11 +79,11 @@
                 <li>
                     <a href="{{route('student.list')}}">
                         <i class="now-ui-icons design_bullet-list-67"></i>
-                        <p>Student List</p>
+                        <p>Stuff List</p>
                     </a>
                 </li>
-                <li>
-                    <a href="">
+                <li class="active">
+                    <a href="{{route('stuff.list')}}">
                         <i class="now-ui-icons design_bullet-list-67"></i>
                         <p>Stuff List</p>
                     </a>
@@ -115,7 +115,7 @@
 
                             </nav>
                             <!-- Page Heading -->
-                            <h1 class="h3 mb-4 text-gray-800">Instructor Management</h1>
+                            <h1 class="h3 mb-4 text-gray-800">Stuff Management</h1>
 
                             <!-- DataTales Example -->
                             <span id="message"></span>
@@ -123,9 +123,9 @@
                                 <div class="card-header py-3">
                                     <div class="row">
                                         <div class="col">
-                                            <h6 class="m-0 font-weight-bold text-primary">Instructor List</h6>
-                                            <a href="{{route('instructor.sheet')}}"><button class="btn"><i
-                                                        class="fa fa-download"></i>Download Instructor List</button></a>
+                                            <h6 class="m-0 font-weight-bold text-primary">Stuff List</h6>
+                                            <a href="{{route('stuff.sheet')}}"><button class="btn"><i
+                                                        class="fa fa-download"></i>Download Stuff List</button></a>
                                         </div>
                                         <div class="col" align="center">
                                             <form>
@@ -148,30 +148,30 @@
                                         <table class="table table-bordered table-hover" id="class_table" width="100%"
                                             cellspacing="0">
                                             <tr class="table-info table-sm">
-                                                <td>Instructor ID</td>
-                                                <td>Instructor Name</td>
-                                                <td>Instructor Email</td>
-                                                <td>Instructor Address</td>
+                                                <td>Stuff ID</td>
+                                                <td>Stuff Name</td>
+                                                <td>Stuff Email</td>
+                                                <td>Stuff Address</td>
                                                 <td>Action</td>
                                             </tr>
 
-                                            @foreach ($instructors as $instructor)
+                                            @foreach ($stuffs as $stuff)
                                             <tr>
-                                                <td>{{$instructor->i_id}}</td>
-                                                <td>{{$instructor->fullname}}</td>
-                                                <td>{{$instructor->email}}</td>
-                                                <td>{{$instructor->address}}</td>
+                                                <td>{{$stuff->s_id}}</td>
+                                                <td>{{$stuff->fullname}}</td>
+                                                <td>{{$stuff->email}}</td>
+                                                <td>{{$stuff->address}}</td>
                                                 <td>
 
                                                     <a class="btn btn-info"
-                                                        href="{{route('instructor.details', ['id' => $instructor->i_id])}}">
+                                                        href="{{route('stuff.details', ['id' => $stuff->s_id])}}">
                                                         Details </a>
                                                     |
                                                     <a class="btn btn-warning"
-                                                        href="{{route('instructor.edit', ['id' => $instructor->i_id])}}">
+                                                        href="{{route('stuff.edit', ['id' => $stuff->s_id])}}">
                                                         Edit </a> |
                                                     <a class=" btn btn-danger"
-                                                        href="{{route('instructor.delete', ['id' => $instructor->i_id])}}">
+                                                        href="{{route('stuff.delete', ['id' => $stuff->s_id])}}">
                                                         Delete </a>
                                                     |
                                                 </td>
@@ -207,7 +207,7 @@
                 $value = $(this).val();
                 $.ajax({
                     type: 'get',
-                    url: "{{ route('instructor.search') }}",
+                    url: "{{ route('stuff.search') }}",
                     data: {
                         'search': $value
                     },

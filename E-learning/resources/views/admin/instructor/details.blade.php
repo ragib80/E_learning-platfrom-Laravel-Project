@@ -72,7 +72,7 @@
                     </a>
                 </li>
                 <li class="">
-                    <a href="/Instructor">
+                    <a href="{{route('instructor.list')}}">
                         <i class="now-ui-icons design_bullet-list-67"></i>
                         <p>Instructor List</p>
                     </a>
@@ -126,7 +126,7 @@
                                         <div class="card-header bg-white border-0">
                                             <div class="row align-items-center">
                                                 <div class="col-8">
-                                                    <h3 class="mb-0">Student Information</h3>
+                                                    <h3 class="mb-0">Instructor Information</h3>
                                                 </div>
                                             </div>
                                         </div>
@@ -138,7 +138,7 @@
                                                             <div class="form-group focused">
                                                                 <label class="form-control-label"
                                                                     for="input-username">Name</label>
-                                                                <h3> {{$student->st_name}} </h3>
+                                                                <h3> {{$instructor->fullname}} </h3>
                                                             </div>
                                                         </div>
                                                         <div class="col-lg-6">
@@ -146,7 +146,7 @@
                                                                 <label class="form-control-label"
                                                                     for="input-email">Email
                                                                     address</label>
-                                                                <h3> {{$student->email}} </h3>
+                                                                <h3> {{$instructor->email}} </h3>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -155,7 +155,7 @@
                                                             <div class="form-group focused">
                                                                 <label class="form-control-label"
                                                                     for="input-first-name">Phone</label>
-                                                                <h3> {{$student->p_num}} </h3>
+                                                                <h3> {{$instructor->p_num}} </h3>
                                                             </div>
                                                         </div>
                                                         <div class="col-lg-6">
@@ -163,7 +163,7 @@
                                                                 <label class="form-control-label" for="course">
                                                                     Enrolled
                                                                     Course</label>
-                                                                <h3> {{$student->c_id}} </h3>
+                                                                <h3> {{$instructor->c_id}} </h3>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -178,13 +178,13 @@
                                                                 <label class="form-control-label"
                                                                     for="input-address">Address</label>
 
-                                                                <h3> {{$student->address}} </h3>
+                                                                <h3> {{$instructor->address}} </h3>
                                                             </div>
                                                         </div>
 
 
                                                     </div>
-                                                    <a class="btn btn-info" href="{{route('student.list')}}">Back</a>
+                                                    <a class="btn btn-info" href="{{route('instructor.list')}}">Back</a>
                                             </form>
 
                                         </div>
@@ -192,7 +192,9 @@
                                 </div>
 
                             </div>
-                        </div>
+
+       
+                 </div>
                     </div>
 </body>
 

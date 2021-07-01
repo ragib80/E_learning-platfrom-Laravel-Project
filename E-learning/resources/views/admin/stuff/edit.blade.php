@@ -71,7 +71,7 @@
                         <p>User Profile</p>
                     </a>
                 </li>
-                <li class="">
+                <li>
                     <a href="{{route('instructor.list')}}">
                         <i class="now-ui-icons design_bullet-list-67"></i>
                         <p>Instructor List</p>
@@ -80,11 +80,11 @@
                 <li>
                     <a href="{{route('student.list')}}">
                         <i class="now-ui-icons design_bullet-list-67"></i>
-                        <p>Student List</p>
+                        <p>Stuff List</p>
                     </a>
                 </li>
-                <li>
-                    <a href="/stuff">
+                <li class="active">
+                    <a href="{{route('stuff.list')}}">
                         <i class="now-ui-icons design_bullet-list-67"></i>
                         <p>Stuff List</p>
                     </a>
@@ -126,13 +126,13 @@
                                         <div class="card-header bg-white border-0">
                                             <div class="row align-items-center">
                                                 <div class="col-8">
-                                                    <h3 class="mb-0">Edit Instructor</h3>
+                                                    <h3 class="mb-0">Edit Stuff</h3>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="card-body">
                                             <form method="post">
-                                                <h6 class="heading-small text-muted mb-4">Instructor information</h6>
+                                                <h6 class="heading-small text-muted mb-4">Stuff information</h6>
                                                 <div class="pl-lg-4">
                                                     <div class="row">
                                                         <div class="col-lg-6">
@@ -141,8 +141,8 @@
                                                                     for="input-username">Name</label>
                                                                 <input type="text" name="name" id="name"
                                                                     class="form-control form-control-alternative"
-                                                                    placeholder="Instructor Name"
-                                                                    value="{{$instructor->fullname}}">
+                                                                    placeholder="Stuff Name"
+                                                                    value="{{$stuff->fullname}}">
                                                             </div>
                                                         </div>
                                                         <div class="col-lg-6">
@@ -152,7 +152,7 @@
                                                                 <input type="text" name="email" id="email"
                                                                     class="form-control form-control-alternative"
                                                                     placeholder="example@example.com"
-                                                                    value="{{$instructor->email}}">
+                                                                    value="{{$stuff->email}}">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -163,7 +163,7 @@
                                                                     for="input-first-name">Phone</label>
                                                                 <input type="text" name="phone" id="input-first-name"
                                                                     class="form-control form-control-alternative"
-                                                                    placeholder="Phone" value="{{$instructor->p_num}}">
+                                                                    placeholder="Phone" value="{{$stuff->p_num}}">
                                                             </div>
                                                         </div>
                                                         <div class="col-lg-6">
@@ -173,7 +173,7 @@
                                                                 <input type="text" name="course_id" id="course_id"
                                                                     class="form-control form-control-alternative"
                                                                     placeholder="Enrolled Course ID"
-                                                                    value="{{$instructor->c_id}}">
+                                                                    value="{{$stuff->c_id}}">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -190,7 +190,7 @@
                                                                 <input id="input-address" name="address"
                                                                     class="form-control form-control-alternative"
                                                                     placeholder="Home Address"
-                                                                    value="{{$instructor->address}}" type="text">
+                                                                    value="{{$stuff->address}}" type="text">
                                                             </div>
                                                         </div>
 
@@ -201,7 +201,7 @@
 
 
        
-                                         <a class="btn btn-info" href="{{route('instructor.list')}}">Back</a>
+                                         <a class="btn btn-info" href="{{route('stuff.list')}}">Back</a>
 
                                         </div>
 
