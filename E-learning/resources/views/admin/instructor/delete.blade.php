@@ -131,14 +131,14 @@
                                             </div>
                                         </div>
                                         <div class="card-body">
-                                            <form>
+                                            <form method="post">
                                                 <div class="pl-lg-4">
                                                     <div class="row">
                                                         <div class="col-lg-6">
                                                             <div class="form-group focused">
                                                                 <label class="form-control-label"
                                                                     for="input-username">Name</label>
-                                                                <h3> {{$student->fullname}} </h3>
+                                                                <h3> {{$student->st_name}} </h3>
                                                             </div>
                                                         </div>
                                                         <div class="col-lg-6">
@@ -184,6 +184,7 @@
 
 
                                                     </div>
+                                                    <button class="btn btn-danger">Delete</button>
                                                     <a class="btn btn-info" href="{{route('student.list')}}">Back</a>
                                             </form>
 
@@ -192,7 +193,10 @@
                                 </div>
 
                             </div>
-                        </div>
+
+
+       
+                 </div>
                     </div>
 </body>
 

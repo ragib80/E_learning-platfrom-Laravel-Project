@@ -158,7 +158,7 @@
                                             @foreach ($students as $student)
                                             <tr>
                                                 <td>{{$student->st_id}}</td>
-                                                <td>{{$student->fullname}}</td>
+                                                <td>{{$student->st_name}}</td>
                                                 <td>{{$student->email}}</td>
                                                 <td>{{$student->address}}</td>
                                                 <td>

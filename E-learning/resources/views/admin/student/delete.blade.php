@@ -138,7 +138,7 @@
                                                             <div class="form-group focused">
                                                                 <label class="form-control-label"
                                                                     for="input-username">Name</label>
-                                                                <h3> {{$student->st_name}} </h3>
+                                                                <h3> {{$student->fullname}} </h3>
                                                             </div>
                                                         </div>
                                                         <div class="col-lg-6">
@@ -193,6 +193,7 @@
                                 </div>
 
                             </div>
+
 
 
        

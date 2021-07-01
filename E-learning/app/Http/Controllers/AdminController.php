@@ -46,7 +46,7 @@ class AdminController extends Controller
     public function updateStudent(Request $req, $id)
     {
         $student = Student::find($id);
-        $student->st_name = $req->name;
+        $student->fullname = $req->name;
         // $user->password = $req->password;
         $student->email = $req->email;
         $student->p_num = $req->phone;
@@ -85,7 +85,7 @@ class AdminController extends Controller
     {
         if ($request->ajax()) {
             $students =
-                Student::where('st_name', 'LIKE', $request->search . '%')
+                Student::where('fullname', 'LIKE', $request->search . '%')
                 ->get();
 
             $output =
@@ -100,12 +100,13 @@ class AdminController extends Controller
             if (count($students) > 0) {
                 if ($students) {
                     foreach ($students as $key => $student) {
+                        $id = $student->st_id;
                         $output .= '<tr>' .
                             '<td>' . $student->st_id . '</td>' .
-                            '<td>' . $student->st_name . '</td>' .
+                            '<td>' . $student->fullname . '</td>' .
                             '<td>' . $student->email . '</td>' .
                             '<td>' . $student->address . '</td>' .
-                            '<td>' . '<a class="btn btn-info" href="route("student.details", ["id" => ' . $student->st_id . '])">' . 'Details' . '</a>' . '</td>' . '|' .
+                            '<td>' . '<a href="{{route("student.details", ["id" => ' . $student->st_id . '])}}">Details</a>' . '</td>' .
                             '</tr>';
                     }
                     return Response($output);

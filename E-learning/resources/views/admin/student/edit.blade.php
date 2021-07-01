@@ -142,7 +142,7 @@
                                                                 <input type="text" name="name" id="name"
                                                                     class="form-control form-control-alternative"
                                                                     placeholder="Student Name"
-                                                                    value="{{$student->st_name}}">
+                                                                    value="{{$student->fullname}}">
                                                             </div>
                                                         </div>
                                                         <div class="col-lg-6">
@@ -198,8 +198,8 @@
                                                 </div>
                                                 <button class="btn btn-info">Save</button>
 
-       
-                                         <a class="btn btn-info" href="{{route('student.list')}}">Back</a>
+
+                                                <a class="btn btn-info" href="{{route('student.list')}}">Back</a>
 
                                         </div>
 
