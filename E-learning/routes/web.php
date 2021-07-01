@@ -53,6 +53,7 @@ Route::get('/instructor/create', 'InstructorController@create');
 Route::get('/instructor/delete', 'InstructorController@delete')->name('instructor.delete');
 Route::get('/instructor/edit', 'InstructorController@edit')->name('instructor.edit');;
 
+Route::get('/student', 'StudentController@index')->name('student.index');
 
 Route::get('/admin', 'AdminController@index')->name('admin.index');
 Route::get('/admin/student/list', 'AdminController@list')->name('student.list');
