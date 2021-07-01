@@ -5,10 +5,12 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Student;
 use App\Models\Instructor;
+use App\Models\Course;
 use App\Models\Stuff;
 use App\Exports\StudentsExport;
 use App\Exports\InstructorsExport;
 use App\Exports\StuffsExport;
+use App\Exports\CoursesExport;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\DB;
 
@@ -375,5 +377,106 @@ class AdminController extends Controller
     public function sheetStuff()
     {
         return Excel::download(new StuffsExport, 'stuffs.xlsx');
+    }
+
+    public function listCourse()
+    {
+        $courses = Course::all();
+        return view('admin.course.list')->with('courses', $courses);
+    }
+    public function detailsCourse($id)
+    {
+        $courses = Course::find($id);
+        return view('admin.course.details')->with('course', $courses);
+    }
+
+    public function editCourse($id)
+    {
+        $courses = Course::find($id);
+        return view('admin.course.edit')->with('course', $courses);
+    }
+
+    public function updateCourse(Request $req, $id)
+    {
+        $course = Course::find($id);
+        $course->fullname = $req->name;
+        // $user->password = $req->password;
+        $course->email = $req->email;
+        $course->p_num = $req->phone;
+        $course->c_id = $req->course_id;
+        $course->address = $req->address;
+        // $user->type = $req->type;
+        $course->save();
+        return redirect()->route('course.list');
+        // return view('user.list')->with('userList', $users);
+    }
+    public function deleteCourse($id)
+    {
+
+        $course = Course::find($id);
+        return view('admin.course.delete')->with('course', $course);
+    }
+
+
+    public function destroyCourse(Request $req, $id)
+    {
+
+        Course::destroy($id);
+        return redirect()->route('course.list');
+    }
+
+
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+
+
+    public function searchCourse(Request $request)
+    {
+        if ($request->ajax()) {
+            $courses =
+                Course::where('fullname', 'LIKE', $request->search . '%')
+                ->get();
+
+            $output =
+                '<tr class="table-info table-sm">' .
+                '<td>' . 'Course ID' . '</td>' .
+                '<td>' . 'Course Name' . '</td>' .
+                '<td>' . 'Course Email' . '</td>' .
+                '<td>' . 'Course Address' . '</td>' .
+                '<td>' . 'Action' . '</td>' .
+
+                '</tr>';
+
+            if (count($courses) > 0) {
+                if ($courses) {
+                    foreach ($courses as $key => $course) {
+                        $output .= '<tr>' .
+                            '<td>' . $course->st_id . '</td>' .
+                            '<td>' . $course->fullname . '</td>' .
+                            '<td>' . $course->email . '</td>' .
+                            '<td>' . $course->address . '</td>' .
+                            '<td>' . '<a class="btn btn-info" href="' . route('course.details', ['id' => $course->st_id]) . '">Details</a>'  . '|'
+                            . '<a class="btn btn-warning" href="' . route('course.edit', ['id' => $course->st_id]) . '">Edit</a>'  . '|'
+                            . '<a class="btn btn-danger" href="' . route('course.delete', ['id' => $course->st_id]) . '">Delete</a>' . '</td>' . '|' .
+                            '</tr>';
+                    }
+                    return Response($output);
+                }
+            } else {
+
+                $output .=
+                    '<tr>' . '<td colspan="5">' . 'No results' . '</td>' . '</tr>';
+                return Response($output);
+            }
+        }
+    }
+
+    public function sheetCourse()
+    {
+        return Excel::download(new CoursesExport, 'courses.xlsx');
     }
 }

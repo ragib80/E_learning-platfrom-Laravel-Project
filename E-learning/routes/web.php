@@ -74,7 +74,6 @@ Route::post('/admin/instructor/delete/{id}', 'AdminController@destroyInstructor'
 Route::get('/admin/instructor/list/download_instructor_data', 'AdminController@sheetInstructor')->name('instructor.sheet');
 Route::get('/admin/instructor/list/search', 'AdminController@searchInstructor')->name('instructor.search');
 
-Route::get('/admin', 'AdminController@index')->name('admin.index');
 Route::get('/admin/stuff/list', 'AdminController@listStuff')->name('stuff.list');
 Route::get('/admin/stuff/details/{id}', 'AdminController@detailsStuff')->name('stuff.details');
 Route::get('/admin/stuff/edit/{id}', 'AdminController@editStuff')->name('stuff.edit');
@@ -83,6 +82,15 @@ Route::get('/admin/stuff/delete/{id}', 'AdminController@deleteStuff')->name('stu
 Route::post('/admin/stuff/delete/{id}', 'AdminController@destroyStuff');
 Route::get('/admin/stuff/list/download_stuff_data', 'AdminController@sheetStuff')->name('stuff.sheet');
 Route::get('/admin/stuff/list/search', 'AdminController@searchStuff')->name('stuff.search');
+
+Route::get('/admin/course/list', 'AdminController@listCourse')->name('course.list');
+Route::get('/admin/course/details/{id}', 'AdminController@detailsCourse')->name('course.details');
+Route::get('/admin/course/edit/{id}', 'AdminController@editCourse')->name('course.edit');
+Route::post('/admin/course/edit/{id}', 'AdminController@updateCourse');
+Route::get('/admin/course/delete/{id}', 'AdminController@deleteCourse')->name('course.delete');
+Route::post('/admin/course/delete/{id}', 'AdminController@destroyCourse');
+Route::get('/admin/course/list/download_course_data', 'AdminController@sheetCourse')->name('course.sheet');
+Route::get('/admin/course/list/search', 'AdminController@searchCourse')->name('course.search');
 
 /*function () {
     //echo "it works...";
