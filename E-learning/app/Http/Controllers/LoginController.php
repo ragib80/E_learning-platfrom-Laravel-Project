@@ -26,11 +26,11 @@ class LoginController extends Controller
 
         if ($user->count() > 0) {
             if ($user->type == 'admin') {
-                $req->session()->put('uname', $req->uname);
+                $req->session()->put('email', $req->email);
                 $req->session()->flash('msg', 'Login Successful');
                 return redirect()->route('admin.index');
             } else if ($user->type == 'instructor') {
-                $req->session()->put('uname', $req->uname);
+                $req->session()->put('email', $req->email);
                 $req->session()->flash('msg', 'Login Successful');
                 return redirect()->route('instructor.index');
             }

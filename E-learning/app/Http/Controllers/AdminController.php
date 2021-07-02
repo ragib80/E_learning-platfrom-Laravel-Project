@@ -5,14 +5,21 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Student;
 use App\Models\Instructor;
+use App\Models\User;
 use App\Models\Course;
 use App\Models\Stuff;
 use App\Exports\StudentsExport;
 use App\Exports\InstructorsExport;
 use App\Exports\StuffsExport;
 use App\Exports\CoursesExport;
+use Illuminate\Contracts\Pagination\Paginator;
+use Illuminate\Pagination\Paginator as PaginationPaginator;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\DB;
+use App\http\Requests\StuffRequest;
+
+
+use Illuminate\Contracts\Support\Jsonable;
 
 class AdminController extends Controller
 {
@@ -26,20 +33,38 @@ class AdminController extends Controller
         return view('admin.index');
         //
     }
-
-
-    public function listStudent()
+    public function profile($id)
     {
-        $students = Student::all();
-        return view('admin.student.list')->with('students', $students);
+        $users = User::find($id);
+        return view('admin.profile.index')->with('user', $users);
+        //
     }
+
+
+    public function listStudent(Request $request)
+    {
+        $students = Student::sortable()->simplePaginate(5);
+
+        $filter = $request->query('filter');
+
+        if (!empty($filter)) {
+            $students = Student::sortable()
+                ->where('fullname', 'like', '%' . $filter . '%')
+                ->Paginate(5);
+        } else {
+            $students = Student::sortable()
+                ->Paginate(5);
+        }
+        return view('admin.student.list')->with('students', $students)->with('filter', $filter);
+    }
+
     public function detailsStudent($id)
     {
         $students = Student::find($id);
         return view('admin.student.details')->with('student', $students);
     }
 
-    public function editStduent($id)
+    public function editStudent($id)
     {
         $students = Student::find($id);
         return view('admin.student.edit')->with('student', $students);
@@ -87,7 +112,7 @@ class AdminController extends Controller
     {
         if ($request->ajax()) {
             $students =
-                Student::where('fullname', 'LIKE', $request->search . '%')
+                Student::where('country', 'LIKE', $request->search . '%')
                 ->get();
 
             $output =
@@ -123,6 +148,8 @@ class AdminController extends Controller
             }
         }
     }
+
+
 
 
 
@@ -478,5 +505,32 @@ class AdminController extends Controller
     public function sheetCourse()
     {
         return Excel::download(new CoursesExport, 'courses.xlsx');
+    }
+    public function addStuff()
+    {
+        return view('admin.stuff.add');
+    }
+    public function createStuff(StuffRequest $req)
+    {
+        $stuff = new Stuff;
+        $stuff->username = $req->username;
+        $stuff->fullname = $req->fullname;
+        $stuff->password = $req->password;
+        $stuff->email = $req->email;
+        $stuff->address = $req->address;
+        $stuff->p_num = $req->phone;
+        $stuff->dob =  $req->dob;
+        // $stuff->type =  $req->type;
+        // $user->profile_img = '';
+        $stuff->save();
+
+        $user = new User;
+        $user->username = $req->username;
+        $user->password = $req->password;
+        $user->email = $req->email;
+        $user->type =  $req->type;
+        // $user->profile_img = '';
+        $user->save();
+        return redirect()->route('stuff.list');
     }
 }
