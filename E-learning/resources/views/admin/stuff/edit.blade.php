@@ -28,6 +28,13 @@
                                     </div>
                                     <div class="card-body">
                                         <form method="post">
+                                            <div class="text-danger">
+                                                {{session('msg')}} <br>
+
+                                                @foreach ($errors->all() as $err)
+                                                {{$err}} <br>
+                                                @endforeach
+                                            </div>
                                             <h6 class="heading-small text-muted mb-4">Stuff information</h6>
                                             <div class="pl-lg-4">
                                                 <div class="row">
@@ -35,7 +42,7 @@
                                                         <div class="form-group focused">
                                                             <label class="form-control-label"
                                                                 for="input-username">Name</label>
-                                                            <input type="text" name="name" id="name"
+                                                            <input type="text" name="fullname" id="name"
                                                                 class="form-control form-control-alternative"
                                                                 placeholder="Stuff Name" value="{{$stuff->fullname}}">
                                                         </div>
@@ -63,9 +70,9 @@
                                                     </div>
                                                     <div class="col-lg-6">
                                                         <div class="form-group focused">
-                                                            <label class="form-control-label"
-                                                                for="input-last-name">Course ID</label>
-                                                            <input type="text" name="course_id" id="course_id"
+                                                            <label class="form-control-label" for="input-last-name">User
+                                                                Name</label>
+                                                            <input type="text" name="username" id="course_id"
                                                                 class="form-control form-control-alternative"
                                                                 placeholder="User Name" value="{{$stuff->username}}">
                                                         </div>
@@ -101,8 +108,10 @@
 
 
                                     </form>
+
                                 </div>
-                            </div>
+           
+                 </div>
                         </div>
                     </div>
                 </div>

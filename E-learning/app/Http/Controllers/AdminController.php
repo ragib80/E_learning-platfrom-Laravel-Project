@@ -8,6 +8,7 @@ use App\Models\Instructor;
 use App\Models\User;
 use App\Models\Course;
 use App\Models\Stuff;
+use App\Models\Document;
 use App\Exports\StudentsExport;
 use App\Exports\InstructorsExport;
 use App\Exports\StuffsExport;
@@ -17,7 +18,10 @@ use Illuminate\Pagination\Paginator as PaginationPaginator;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\DB;
 use App\http\Requests\StuffRequest;
-
+use App\http\Requests\UpdateStuffRequest;
+use App\http\Requests\UpdateStudentRequest;
+use App\http\Requests\UpdateInstructorRequest;
+use Illuminate\Support\Facades\Validator;
 
 use Illuminate\Contracts\Support\Jsonable;
 
@@ -70,7 +74,7 @@ class AdminController extends Controller
         return view('admin.student.edit')->with('student', $students);
     }
 
-    public function updateStudent(Request $req, $id)
+    public function updateStudent(UpdateStudentRequest $req, $id)
     {
         $student = Student::find($id);
         $student->fullname = $req->name;
@@ -166,7 +170,7 @@ class AdminController extends Controller
                 ],
                 [
                     'file'          => 'required',
-                    'extension'      => 'required|in:xlsx,xls',
+                    'extension'      => 'required|in:xlsx,xls,pdf',
                 ]
             );
             if ($validation->fails()) {
@@ -183,16 +187,24 @@ class AdminController extends Controller
             echo "File Mime Type: " . $file->getMimeType() . "<br>";
             echo "File Size: " . $file->getSize() . "<br>";
 
-            if ($file->move('upload', 'sales_log.' . $file->getClientOriginalExtension())) {
-                $req->session()->flash('msg', 'File Uploaded Successful');
-                return redirect()->route('sales.physical');
+            if ($file->move('upload', 'notes.' . $file->getClientOriginalExtension())) {
+                $data = new Document;
+                $file = $req->file('file');
+                $filename = time() . '.' . $file->getClientOriginalExtension();
+                $data->file = $filename;
+                $req->session()->flash('success', 'File Uploaded Successful');
+                $data->c_id = $req->c_id;
+                $data->title = $req->title;
+                $data->description = $req->description;
+                $data->save();
+                return redirect()->back();
             } else {
                 $req->session()->flash('msg', 'File Uploaded Not Successful');
-                return redirect()->route('sales.log');
+                return redirect()->route('notice.list');
             }
         } else {
             $req->session()->flash('msg', 'Please Upload a file to Load');
-            return redirect()->route('sales.log');
+            return redirect()->route('notice.list');
         }
     }
 
@@ -220,7 +232,7 @@ class AdminController extends Controller
         return view('admin.instructor.edit')->with('instructor', $instructors);
     }
 
-    public function updateInstructor(Request $req, $id)
+    public function updateInstructor(UpdateInstructorRequest $req, $id)
     {
         $instructor = Instructor::find($id);
         $instructor->fullname = $req->name;
@@ -322,14 +334,14 @@ class AdminController extends Controller
         return view('admin.stuff.edit')->with('stuff', $stuffs);
     }
 
-    public function updateStuff(Request $req, $id)
+    public function updateStuff(UpdateStuffRequest $req, $id)
     {
         $stuff = Stuff::find($id);
-        $stuff->fullname = $req->name;
+        $stuff->fullname = $req->fullname;
+        $stuff->username = $req->username;
         // $user->password = $req->password;
         $stuff->email = $req->email;
         $stuff->p_num = $req->phone;
-        $stuff->c_id = $req->course_id;
         $stuff->address = $req->address;
         // $user->type = $req->type;
         $stuff->save();
@@ -510,6 +522,10 @@ class AdminController extends Controller
     {
         return view('admin.stuff.add');
     }
+    public function notice()
+    {
+        return view('admin.notice.notice');
+    }
     public function createStuff(StuffRequest $req)
     {
         $stuff = new Stuff;
@@ -532,5 +548,20 @@ class AdminController extends Controller
         // $user->profile_img = '';
         $user->save();
         return redirect()->route('stuff.list');
+    }
+    public function uploadfile(Request $request)
+    {
+        $data = new Document;
+        if ($request->file('file')) {
+            $file = $request->file('file');
+            $filename = time() . '.' . $file->getClientOriginalExtension();
+            $request->file->move('storage/', $filename);
+            $data->file = $filename;
+        }
+        $data->c_id = $request->c_id;
+        $data->title = $request->title;
+        $data->description = $request->description;
+        $data->save();
+        return redirect()->back();
     }
 }

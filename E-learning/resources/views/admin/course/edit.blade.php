@@ -93,12 +93,6 @@
                                             </div>
                                             <button class="btn btn-info">Save</button>
 
-
-
-
-
-
-
                                             <a class="btn btn-info" href="{{route('course.list')}}">Back</a>
 
                                     </div>

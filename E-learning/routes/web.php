@@ -54,10 +54,9 @@ Route::get('/instructor/list', 'InstructorController@index')->name('instructor.i
 // Route::get('/instructor/edit', 'InstructorController@edit')->name('instructor.edit');;
 Route::get('/student', 'StudentController@index')->name('student.index');
 Route::group(['middleware' => ['sess']], function () {
-    
 });
 Route::group(['middleware' => ['type']], function () {
-    Route::get('/admin/notice/list', 'AdminController@index')->name('notice.list');
+    Route::get('/admin/notice/notice', 'AdminController@notice')->name('notice.list');
 
     Route::get('/admin', 'AdminController@index')->name('admin.index');
     Route::get('/admin/profile/{id}', 'AdminController@profile')->name('admin.profile');
@@ -98,6 +97,8 @@ Route::group(['middleware' => ['type']], function () {
     Route::post('/admin/course/delete/{id}', 'AdminController@destroyCourse');
     Route::get('/admin/course/list/download_course_data', 'AdminController@sheetCourse')->name('course.sheet');
     Route::get('/admin/course/list/search', 'AdminController@searchCourse')->name('course.search');
+
+    Route::post('/files', 'AdminController@data');
 });
 
 /*function () {

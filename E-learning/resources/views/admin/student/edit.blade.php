@@ -27,6 +27,13 @@
                                         </div>
                                     </div>
                                     <div class="card-body">
+                                        <div class="text-danger">
+                                            {{session('msg')}} <br>
+
+                                            @foreach ($errors->all() as $err)
+                                            {{$err}} <br>
+                                            @endforeach
+                                        </div>
                                         <form method="post">
                                             <h6 class="heading-small text-muted mb-4">Student information</h6>
                                             <div class="pl-lg-4">
@@ -98,6 +105,7 @@
                                             <a class="btn btn-info" href="{{route('student.list')}}">Back</a>
 
                                     </div>
+
 
 
                                     </form>
