@@ -34,7 +34,12 @@ class AdminController extends Controller
      */
     public function index()
     {
-        return view('admin.index');
+        $students = Student::count();
+        $instructors = Instructor::count();
+        $stuffs = Stuff::count();
+        $courses = Course::count();
+
+        return view('admin.index')->with('students', $students)->with('instructors', $instructors)->with('stuffs', $stuffs)->with('courses', $courses);
         //
     }
     public function profile($id)

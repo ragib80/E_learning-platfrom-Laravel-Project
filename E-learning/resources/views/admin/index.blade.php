@@ -16,14 +16,21 @@
                             <a class="navbar-brand"> </a>
                         </nav>
                         {{session('msg')}}
+                        <h1>Total No. of Students: {{$students}}</h1> <br>
+                        <h1>Total No. of Instructor: {{$instructors}}</h1><br>
+                        <h1>Total No. of Support Stuff: {{$stuffs}}</h1>
+                        <h1>Total No. of Courses: {{$courses}}</h1>
 
                     </div>
                 </div>
+
             </div>
+
         </div>
     </div>
 </div>
 @endsection
 </body>
+
 
 </html>

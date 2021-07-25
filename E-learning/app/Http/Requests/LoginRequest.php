@@ -24,16 +24,18 @@ class LoginRequest extends FormRequest
     public function rules()
     {
         return [
-            'email' => 'required',
-            'password' => 'required|min:5'
+            'email' => 'required|regex:/(.+)@(.+)\.(.+)/i|max:50',
+            'password' => 'required|min:8|max:20|regex:/^[\w-]*$/',
         ];
     }
 
     public function messages()
     {
         return [
-            'email.required' => 'Username Cant be empty..',
-            'password.min' => 'Password at least 5 charecter..',
+            'email.regex' => 'email must be contain @',
+            'email.max' => 'Email length should be maximum 50 chararcters',
+            'password.max' => 'Password at maximum 20 characters',
+            'password.regex' => 'password should be alphanumeric',
         ];
     }
 }
