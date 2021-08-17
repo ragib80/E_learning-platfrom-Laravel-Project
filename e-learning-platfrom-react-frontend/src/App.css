@@ -1,38 +1,150 @@
-.App {
+.old-style {
+  font-family: 'Sorts Mill Goudy', serif;
+}
+
+.transitional {
+  font-family: 'Libre Baskerville', serif;
+}
+
+.didot {
+  font-family: 'Rufina', serif;
+}
+
+.slab {
+  font-family: 'Rokkitt', serif;
+}
+
+.fat-face {
+  font-family: 'Alfa Slab One', cursive;
+}
+
+.grotesque {
+  font-family: 'Roboto', sans-serif;
+}
+
+.geometric {
+  font-family: 'Questrial', sans-serif;
+}
+
+.humanist {
+  font-family: 'Lato', sans-serif;
+}
+
+.display {
+  font-family: 'Lobster', cursive;
+}
+
+.monospace {
+  font-family: 'Droid Sans Mono', monospace;
+}
+body {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
+  /* ... */
+}
+
+em {
+  font-style: italic;
+}
+
+strong {
+  font-weight: bold;
+  /* Or 700 */
+}
+.row-header {
+  margin: 0px auto;
+  padding: 0px auto;
+}
+
+.row-content {
+  margin: 0px auto;
+  padding: 50px 0px 50px 0px;
+  border-bottom: 1px ridge;
+  min-height: 400px;
+}
+
+.footer {
+  background-color: #c4d0e9;
+  margin: 0px auto;
+  padding: 20px 0px 20px 0px;
+}
+
+.jumbotron {
+  padding: 70px 30px 70px 30px;
+  margin: 0px auto;
+  background: #2933be;
+  color: floralwhite;
+}
+
+address {
+  font-size: 80%;
+  margin: 0px;
+  color: #0f0f0f;
+}
+
+.navbar-dark {
+  background-color: #060693;
+}
+
+
+.heading {
+  font-size: 30px;
+  padding: 16px 0;
+  color: #444;
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+
+
+.search-label {
+  position: relative;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.container input {
+  width: 100%;
+  padding: 8px;
+  font-size: 18px;
+  font-style: italic;
+  color: #444;
+  box-sizing: border-box;
+  outline: none;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.search-icon {
+  position: absolute;
+  top: 10px;
+  font-size: 18px;
+  color: #555;
+  right: 5px;
+}
+.page-enter {
+  opacity: 0.01;
+  transform: translateX(-100%);
 }
 
-.App-link {
-  color: #61dafb;
+.page-enter-active {
+  opacity: 1;
+  transform: translateX(0%);
+  transition: all 600ms ease-in;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.page-exit {
+  opacity: 1;
+  transform: translateX(0%);
+}
+
+.page-exit-active {
+  opacity: 0.01;
+  transform: translateX(100%);
+  transition: all 600ms ease-out;
+}
+p{
+  font-family: 'Roboto',
+  sans-serif;
+  font-weight: 300;
+}
+
+
+.section {
+  padding: 50px 0;
 }

@@ -31,8 +31,10 @@ class AdminController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Response\
+     *
      */
+
     public function index()
     {
         $students = Student::count();
@@ -40,16 +42,15 @@ class AdminController extends Controller
         $stuffs = Stuff::count();
         $courses = Course::count();
 
-        return view('admin.index')->with('students', $students)->with('instructors', $instructors)->with('stuffs', $stuffs)->with('courses', $courses);
+        return response()->json([
+            'status' => 200,
+            'courses' => $courses, 'students' => $students, 'instructors' => $instructors,
+            'stuffs' => $stuffs
+
+        ]);
         //
     }
-    public function userJson()
-    {
-        $users = Shop::all()->toArray();
-        // $users = json_decode($users);
-        return response()->json(['Users', $users]);
-        //
-    }
+
 
     public function profile($id)
     {
@@ -66,45 +67,52 @@ class AdminController extends Controller
 
     public function listStudent(Request $request)
     {
-        $students = Student::sortable()->simplePaginate(5);
+        $students = Student::all();
 
-        $filter = $request->query('filter');
+        return response()->json([
+            'status' => 200,
+            'students' => $students
 
-        if (!empty($filter)) {
-            $students = Student::sortable()
-                ->where('fullname', 'like', '%' . $filter . '%')
-                ->Paginate(5);
-        } else {
-            $students = Student::sortable()
-                ->Paginate(5);
-        }
-        return view('admin.student.list')->with('students', $students)->with('filter', $filter);
+        ]);
     }
 
     public function detailsStudent($id)
     {
         $students = Student::find($id);
-        return view('admin.student.details')->with('student', $students);
+        return response()->json([
+            'status' => 200,
+            'students' => $students
+
+        ]);
     }
 
     public function editStudent($id)
     {
         $students = Student::find($id);
-        return view('admin.student.edit')->with('student', $students);
+        return response()->json([
+            'status' => 200,
+            'students' => $students
+
+        ]);
     }
 
     public function updateStudent(UpdateStudentRequest $req, $id)
     {
         $student = Student::find($id);
-        $student->fullname = $req->name;
+        $student->fullname = $req->fullname;
         // $user->password = $req->password;
-        $student->email = $req->email;
-        $student->p_num = $req->phone;
-        $student->c_id = $req->course_id;
+        // $student->email = $req->email;
+        $student->p_num = $req->p_num;
+        $student->c_id = $req->c_id;
         $student->address = $req->address;
+        $student->country = $req->country;
         // $user->type = $req->type;
         $student->save();
-        return redirect()->route('student.list');
+        return response()->json([
+            'status' => 200,
+            'students' => $student
+
+        ]);
         // return view('user.list')->with('userList', $users);
     }
     public function deleteStudent($id)
@@ -119,7 +127,12 @@ class AdminController extends Controller
     {
 
         Student::destroy($id);
-        return redirect()->route('student.list');
+
+        return response()->json([
+            'status' => 200,
+            'message' => "Deleted  Succesfully",
+
+        ]);
     }
 
 
@@ -442,7 +455,11 @@ class AdminController extends Controller
     public function listCourse()
     {
         $courses = Course::all();
-        return view('admin.course.list')->with('courses', $courses);
+        return response()->json([
+            'status' => 200,
+            'courses' => $courses
+
+        ]);
     }
     public function detailsCourse($id)
     {

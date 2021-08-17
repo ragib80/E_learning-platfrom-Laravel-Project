@@ -26,11 +26,10 @@ class UpdateStudentRequest extends FormRequest
         return [
 
 
-            'name' => 'required|between :3,30|regex:/^[a-zA-Z\s]+$/',
-            'course_id' => 'required',
-            'email' => 'required|regex:/(.+)@(.+)\.(.+)/i|between :10,50',
-            'address' => 'required|max:50 |min:3',
-            'phone' => 'required|digits_between :11,15|numeric',
+            'fullname' => 'required|between :3,30|regex:/^[a-zA-Z\s]+$/',
+            'c_id' => 'required',
+            // 'email' => 'required|regex:/(.+)@(.+)\.(.+)/i|between :10,50',
+            'p_num' => 'required|digits_between :11,15|numeric'
         ];
     }
 }
