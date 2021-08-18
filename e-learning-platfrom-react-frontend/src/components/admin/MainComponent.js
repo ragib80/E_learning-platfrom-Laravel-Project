@@ -14,6 +14,7 @@ import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import Dashboard from './Dashboard';
 import Insights from './Insights';
 import Scholarship from './Scholarship';
+import CourseList from './CourseList';
 function Main(){
     const [courses, setCourses] = useState([]);
     const [students, setStudents] = useState([]);
@@ -68,28 +69,28 @@ function Main(){
               
               );
             }
-            const EditId = ({match}) => {
-                return(
-                    <AddCourse courses={courses.filter((course) => course.c_id === parseInt(match.params.id,10))[0]} />
-                    );
+    const EditId = ({match}) => {
+        return(
+            <AddCourse courses={courses.filter((course) => course.c_id === parseInt(match.params.id,10))[0]} />
+            );
     };
-            const EditStudent = ({ match }) => {
-                return(
-                    <AddStudent students={students.filter((student) => student.st_id === parseInt(match.params.id,10))[0]} />
-                    );
-                };
-            const viewCourse= ({match}) => {
-                return(
-                    <ViewCourse courses={courses.filter((course) => course.c_id === parseInt(match.params.id,10))[0]} loading = {loading}/>
-                    );
-                };
-   const viewStudent = ({ match }) => {
-                return(
-                    <ViewStudent students={students.filter((student) => student.st_id === parseInt(match.params.id, 10))[0]} loading={loading}
-                    courses={courses.filter((course) => course.c_id === parseInt(match.params.id,10))[0]}/>
+    const EditStudent = ({ match }) => {
+        return(
+            <AddStudent students={students.filter((student) => student.st_id === parseInt(match.params.id,10))[0]} />
+            );
+        };
+    const viewCourse= ({match}) => {
+        return(
+            <ViewCourse courses={courses.filter((course) => course.c_id === parseInt(match.params.id,10))[0]} loading = {loading}/>
+            );
+        };
+    const viewStudent = ({ match }) => {
+        return(
+            <ViewStudent students={students.filter((student) => student.st_id === parseInt(match.params.id, 10))[0]} loading={loading}
+            courses={courses.filter((course) => course.c_id === parseInt(match.params.id,10))[0]}/>
 
-                    );
-   };
+            );
+    };
     const DeleteStudent = async (e, id) => {
         const clicked = e.currentTarget;
         clicked.innerText = "Deleting...";
@@ -101,6 +102,55 @@ function Main(){
 
         }
     }
+    const DeleteCourse = async (e, id) => {
+        const clicked = e.currentTarget;
+        clicked.innerText = "Deleting...";
+        const res = await axios.post(`http://localhost:8000/api/admin/course/delete/${id}`);
+
+        if (res.data.status === 200) {
+            
+            history.push('/courseList');
+
+        }
+    }
+    const DeactivateCourse = async (e, id) => {
+        const clicked = e.currentTarget;
+        clicked.innerText = "Deactivating...";
+        const res = await axios.post(`http://localhost:8000/api/admin/course/deactivate/${id}`);
+
+        if (res.data.status === 200) {
+            
+            history.push('/courseList');
+
+        }
+    }
+    const ActivateCourse = async (e, id) => {
+        const clicked = e.currentTarget;
+        clicked.innerText = "Activating...";
+        const res = await axios.post(`http://localhost:8000/api/admin/course/activate/${id}`);
+
+        if (res.data.status === 200) {
+            
+            history.push('/courseList');
+
+        }
+    }
+    const viewActiveCourses = ({ match }) => {
+        return(
+            <Course loading={loading} DeleteCourse={DeleteCourse} DeactivateCourse={DeactivateCourse}
+                courses={courses.filter((course) => course.status === "active")}
+                status={"Deactivate"}/>
+
+            );
+    };
+    const viewDeactiveCourses = ({ match }) => {
+        return(
+            <Course loading={loading} status={"Activate"} DeleteCourse={DeleteCourse} ActivateCourse={ActivateCourse}
+            courses={courses.filter((course) => course.status === "deactive")}/>
+
+            );
+    };
+
     const AcceptScholarship = async (e, id) => {
         const clicked = e.currentTarget;
         clicked.innerText = "Accepting...";
@@ -130,14 +180,16 @@ function Main(){
               <Switch location={location}>
         
                 <Route path='/home' component={HomePage} />
-                <Route  path="/course" component={() => <Course courses={courses} loading = {loading}/>}  />
-                <Route path="/student" component={() => <Student students={students} loading={loading} DeleteStudent={DeleteStudent}/>}  />
+                <Route  path="/admin/active-course" component={viewActiveCourses} />
+                <Route path="/admin/deactive-course" component={viewDeactiveCourses} />
+                <Route path="/admin/student" component={() => <Student students={students} loading={loading} DeleteStudent={DeleteStudent}/>}  />
                 <Route exact path="/editCourse/:id"  component={EditId} />
                 <Route exact path="/admin/viewCourse/:id" component={viewCourse}/>
                 <Route  exact path="/admin/viewStudent/:id" component={viewStudent}/>
                 <Route exact path="/admin/editStudent/:id"  component={EditStudent} />
                 <Route exact path="/admin/addStudent"  component={() => <AddStudent />}/>
                 <Route path="/dashboard"  component={() => <Dashboard/>}/>
+                <Route path="/courseList"  component={() => <CourseList/>}/>
                 <Route path="/scholarship" component={() => <Scholarship scholarships={scholarships} AcceptScholarship={AcceptScholarship} RejectScholarship={RejectScholarship}/>}/>
                 <Route path="/insights" component={() => <Insights studentCount={studentCount} courseCount={courseCount}/>}/>
                 <Redirect to="/home" /> 

@@ -64,6 +64,9 @@ Route::get('/admin/scholarship/list', 'AdminController@listScholarship')->name('
 Route::post('/admin/scholarship/accept/{id}', 'AdminController@acceptScholarship');
 Route::post('/admin/scholarship/reject/{id}', 'AdminController@rejectScholarship');
 
+Route::post('/admin/course/activate/{id}', 'AdminController@activateCourse');
+Route::post('/admin/course/deactivate/{id}', 'AdminController@deactivateCourse');
+
 Route::post('/files', 'AdminController@data');
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {

@@ -14,19 +14,19 @@ function RenderDash() {
     return (
         <React.Fragment>
             <div className="col-12 col-md-12">
-            <h1 className="humanist text-center">Welcome To Dashboard</h1>
+            <h1 className="humanist text-center" color="primary">Welcome To Dashboard</h1>
             </div>
             <div className="col-12 col-md-4">
                  <FadeTransform in transformProps={{
                     exitTransform: 'scale(0.5) translateY(-50%)'
                 }}>
-            <Card className="m-3">
+            <Card className="m-3 p-2">
                <CardImg width="100%" height="80%" src="assets/images/students.svg" alt="student" />
             <CardBody>
                 <CardTitle>Student</CardTitle>
-            <CardSubtitle></CardSubtitle> 
+            <CardSubtitle>Here You Can See All Students Information</CardSubtitle> 
                 <CardText>
-                 <Link to={"/student"} className="btn btn-primary btn sm">View</Link>
+                 <Link to={"/student"} className="btn btn-primary btn-md mt-2">View</Link>
             </CardText>
             </CardBody>
                 </Card>
@@ -36,13 +36,13 @@ function RenderDash() {
                  <FadeTransform in transformProps={{
                     exitTransform: 'scale(0.5) translateY(-50%)'
                 }}>
-            <Card className="m-3">
+            <Card className="m-3 p-2">
                <CardImg width="100%" src="assets/images/course.jpg" alt="course" />
             <CardBody>
                 <CardTitle>Course</CardTitle>
-            <CardSubtitle></CardSubtitle> 
+            <CardSubtitle>Here You Can See All Courses Information</CardSubtitle> 
                 <CardText>
-                 <Link to={"/course"} className="btn btn-primary btn sm">View</Link>
+                 <Link to={"/courseList"} className="btn btn-primary btn-md mt-2">View</Link>
             </CardText>
             </CardBody>
                 </Card>
@@ -52,13 +52,13 @@ function RenderDash() {
                  <FadeTransform in transformProps={{
                     exitTransform: 'scale(0.5) translateY(-50%)'
                 }}>
-            <Card className="m-3">
+            <Card className="m-3 p-2">
                <CardImg width="100%" src="assets/images/employee.jpg" alt="stuff" />
             <CardBody>
                 <CardTitle>Stuff</CardTitle>
-            <CardSubtitle></CardSubtitle> 
+            <CardSubtitle>Here You Can See All Stuff Information</CardSubtitle> 
                 <CardText>
-                 <Link to={"/stuff"} className="btn btn-primary btn sm">View</Link>
+                 <Link to={"/stuff"} className="btn btn-primary btn-md mt-2">View</Link>
             </CardText>
             </CardBody>
                     </Card>
@@ -68,13 +68,13 @@ function RenderDash() {
                  <FadeTransform in transformProps={{
                     exitTransform: 'scale(0.5) translateY(-50%)'
                 }}>
-            <Card className="m-3">
+            <Card className="m-3 p-2">
                <CardImg width="100%" src="assets/images/instructor.jpg" alt="instructor" />
             <CardBody>
                 <CardTitle>Instructors</CardTitle>
-            <CardSubtitle></CardSubtitle> 
+            <CardSubtitle>Here You Can See All Instructors Information</CardSubtitle> 
                 <CardText>
-                 <Link to={"/instructors"} className="btn btn-primary btn sm">View</Link>
+                 <Link to={"/instructors"} className="btn btn-primary btn-md mt-2">View</Link>
             </CardText>
             </CardBody>
                     </Card>
@@ -83,13 +83,13 @@ function RenderDash() {
                  <FadeTransform in transformProps={{
                     exitTransform: 'scale(0.5) translateY(-50%)'
                 }}>
-            <Card className="m-3">
+            <Card className="m-3 p-2">
                <CardImg width="100%" src="assets/images/insights.jpg" alt="insights" />
             <CardBody>
                 <CardTitle>Insights</CardTitle>
-            <CardSubtitle></CardSubtitle> 
+            <CardSubtitle>Here You Can See Insights of Application</CardSubtitle> 
                 <CardText>
-                 <Link to={"/insights"} className="btn btn-primary btn sm">View</Link>
+                 <Link to={"/insights"} className="btn btn-primary btn-md mt-2">View</Link>
             </CardText>
             </CardBody>
                     </Card>
@@ -99,13 +99,13 @@ function RenderDash() {
                  <FadeTransform in transformProps={{
                     exitTransform: 'scale(0.5) translateY(-50%)'
                 }}>
-            <Card className="m-3">
+            <Card className="m-3 p-2">
                <CardImg width="100%" src="assets/images/scholarship.jpg" alt="scholarship" />
             <CardBody>
                 <CardTitle>Scholarship</CardTitle>
-            <CardSubtitle></CardSubtitle> 
+            <CardSubtitle>Here You Can See All Students Scholarship Request</CardSubtitle> 
                 <CardText>
-                 <Link to={"/scholarship"} className="btn btn-primary btn sm">View</Link>
+                 <Link to={"/scholarship"} className="btn btn-primary btn-md mt-2">View</Link>
             </CardText>
             </CardBody>
                     </Card>

@@ -478,19 +478,24 @@ class AdminController extends Controller
         return view('admin.course.edit')->with('course', $courses);
     }
 
-    public function updateCourse(Request $req, $id)
+    public function activateCourse(Request $req, $id)
     {
-        $course = Course::find($id);
-        $course->fullname = $req->name;
-        // $user->password = $req->password;
-        $course->email = $req->email;
-        $course->p_num = $req->phone;
-        $course->c_id = $req->course_id;
-        $course->address = $req->address;
-        // $user->type = $req->type;
-        $course->save();
+        $courses = Course::find($id);
+        $courses->status = "active";
+        $courses->save();
         return redirect()->route('course.list');
         // return view('user.list')->with('userList', $users);
+    }
+    public function deactivateCourse(Request $req, $id)
+    {
+        $courses = Course::find($id);
+        $courses->status = "deactive";
+        $courses->save();
+        return response()->json([
+            'status' => 200,
+            'courses' => $courses
+
+        ]);
     }
     public function deleteCourse($id)
     {
@@ -504,7 +509,11 @@ class AdminController extends Controller
     {
 
         Course::destroy($id);
-        return redirect()->route('course.list');
+        return response()->json([
+            'status' => 200,
+            'message' => "Deleted  Succesfully",
+
+        ]);
     }
 
 
