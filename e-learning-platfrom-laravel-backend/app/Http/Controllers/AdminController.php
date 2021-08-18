@@ -22,6 +22,7 @@ use App\http\Requests\StuffRequest;
 use App\http\Requests\UpdateStuffRequest;
 use App\http\Requests\UpdateStudentRequest;
 use App\http\Requests\UpdateInstructorRequest;
+use App\Models\Scholarship;
 use Illuminate\Support\Facades\Validator;
 
 use Illuminate\Contracts\Support\Jsonable;
@@ -464,7 +465,11 @@ class AdminController extends Controller
     public function detailsCourse($id)
     {
         $courses = Course::find($id);
-        return view('admin.course.details')->with('course', $courses);
+        return response()->json([
+            'status' => 200,
+            'courses' => $courses
+
+        ]);
     }
 
     public function editCourse($id)
@@ -602,4 +607,46 @@ class AdminController extends Controller
         $data->save();
         return redirect()->back();
     }
+    public function listScholarship()
+    {
+        $scholarships = Scholarship::all();
+        return response()->json([
+            'status' => 200,
+            'scholarships' => $scholarships
+
+        ]);
+    }
+    public function acceptScholarship(Request $req, $id)
+    {
+        $scholarships = Scholarship::find($id);
+        $scholarships->status = "accepted";
+        $scholarships->save();
+
+        return response()->json([
+            'status' => 200,
+            'scholarships' => $scholarships
+
+        ]);
+    }
+    public function rejectScholarship(Request $req, $id)
+    {
+        $scholarships = Scholarship::find($id);
+        $scholarships->status = "rejected";
+        $scholarships->save();
+        return response()->json([
+            'status' => 200,
+            'scholarships' => $scholarships
+
+        ]);
+    }
+    // public function deleteScholarship($id)
+    // {
+
+    //     $scholarships = Scholarship::find($id);
+    //     return response()->json([
+    //         'status' => 200,
+    //         'scholarships' => $scholarships
+
+    //     ]);
+    // }
 }

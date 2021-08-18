@@ -16,10 +16,10 @@ function RenderCourse({ course,loading }) {
                 <div className="row">
                     <Breadcrumb>
                         <BreadcrumbItem><Link to="/course">Course</Link></BreadcrumbItem>
-                            <BreadcrumbItem active>{course.name}</BreadcrumbItem>
+                            <BreadcrumbItem active>{course.c_name}</BreadcrumbItem>
                     </Breadcrumb>
                     <div className="col-12">
-                            <h3>{course.name}</h3>
+                            <h3>{course.c_name}</h3>
                         <hr />
                     </div>                
                 </div>
@@ -28,19 +28,19 @@ function RenderCourse({ course,loading }) {
                                                                     <FadeTransform in transformProps={{
                     exitTransform: 'scale(0.5) translateY(-50%)'
                 }}>
-                                <img width="100%" src={course.image} alt={course.name} />
+                                <img width="100%" src={course.image} alt={course.c_name} />
                                 </FadeTransform>
                         </div>
                         <div className='col-12 col-md-5 m-1'>
                                 <CardBody>
                                  <Stagger in>
                                     <Fade in>
-                                <CardTitle>{course.name}</CardTitle>
-                                <CardText> {course.username}
+                                <CardTitle>{course.c_name}</CardTitle>
+                                <CardText> {course.type}
                                 </CardText>   <CardText> 
-                                    {course.email}
+                                    {course.enrolled}
                                 </CardText>   <CardText> 
-                                    {course.telnum}
+                                    {course.status}
                                 </CardText>  
                                     </Fade>
                                 </Stagger>

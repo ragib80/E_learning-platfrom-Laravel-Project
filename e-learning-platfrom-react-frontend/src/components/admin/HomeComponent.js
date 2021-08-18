@@ -27,9 +27,8 @@ function RenderCourse({items,loading}) {
                 <CardTitle>{item.c_name}</CardTitle>
             {item.type ? <CardSubtitle>{item.type}</CardSubtitle> : null }
                         <CardText>
-                                    <Link to={`viewCourse/${item.c_id}`} className="btn btn-primary btn sm">View</Link>|
-                                     <Link to={`editCourse/${item.c_id}`} className="btn btn-success btn sm">Edit</Link>|
-                      <button type="button" onClick={(e) => this.deleteStudent(e, item.id)} className='btn btn-danger btn-sm'>Delete</button>                
+                        <Link to={`viewCourse/${item.c_id}`} className="btn btn-primary btn sm">View</Link>|
+                      <button type="button" onClick={(e) => this.deleteStudent(e, item.c_id)} className='btn btn-danger btn-sm'>Deactivate</button>                
             </CardText>
             </CardBody>
         </Card>

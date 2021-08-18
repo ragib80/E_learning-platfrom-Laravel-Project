@@ -13,9 +13,11 @@ import Student from './Student';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import Dashboard from './Dashboard';
 import Insights from './Insights';
+import Scholarship from './Scholarship';
 function Main(){
-    const [courses, setcourses] = useState([]);
+    const [courses, setCourses] = useState([]);
     const [students, setStudents] = useState([]);
+    const [scholarships, setScholarship] = useState([]);
     const [loading, setLoading] = useState(true);
     const [msg, setMessage] = useState('');
     const { id } = useParams();
@@ -28,12 +30,17 @@ function Main(){
         useEffect(() => {
     const loadCourse = async()=> await axios.get('http://localhost:8000/api/admin/course/list')
         .then(response => {
-            setcourses(response.data.courses);
+            setCourses(response.data.courses);
             setLoading(false);
         });
         const loadStudent =()=>axios.get('http://localhost:8000/api/admin/student/list')
         .then(response => {
             setStudents(response.data.students);
+            setLoading(false);
+        });
+        const loadScholarship = () => axios.get('http://localhost:8000/api/admin/scholarship/list')
+        .then(response => {
+            setScholarship(response.data.scholarships);
             setLoading(false);
         });
         const loadCount = () => axios.get('http://localhost:8000/api/admin')
@@ -43,6 +50,7 @@ function Main(){
             setLoading(false);
         });
             loadStudent();
+            loadScholarship();
             loadCourse();
             loadCount();
         }, [])
@@ -70,26 +78,46 @@ function Main(){
                     <AddStudent students={students.filter((student) => student.st_id === parseInt(match.params.id,10))[0]} />
                     );
                 };
-            const ViewId = ({match}) => {
+            const viewCourse= ({match}) => {
                 return(
                     <ViewCourse courses={courses.filter((course) => course.c_id === parseInt(match.params.id,10))[0]} loading = {loading}/>
                     );
                 };
-   const ViewS = ({ match }) => {
+   const viewStudent = ({ match }) => {
                 return(
                     <ViewStudent students={students.filter((student) => student.st_id === parseInt(match.params.id, 10))[0]} loading={loading}
-                    courses={courses.filter((course) => course.id === parseInt(match.params.id,10))[0]}/>
+                    courses={courses.filter((course) => course.c_id === parseInt(match.params.id,10))[0]}/>
 
                     );
    };
     const DeleteStudent = async (e, id) => {
-        console.log(id);
         const clicked = e.currentTarget;
         clicked.innerText = "Deleting...";
         const res = await axios.post(`http://localhost:8000/api/admin/student/delete/${id}`);
 
         if (res.data.status === 200) {
+            
             history.push('/student');
+
+        }
+    }
+    const AcceptScholarship = async (e, id) => {
+        const clicked = e.currentTarget;
+        clicked.innerText = "Accepting...";
+        const res = await axios.post(`http://localhost:8000/api/admin/scholarship/accept/${id}`);
+
+        if (res.data.status === 200) {
+            history.push('/scholarship');
+
+        }
+    }
+    const RejectScholarship = async (e, id) => {
+        const clicked = e.currentTarget;
+        clicked.innerText = "Rejecting...";
+        const res = await axios.post(`http://localhost:8000/api/admin/scholarship/reject/${id}`);
+
+        if (res.data.status === 200) {
+            history.push('/scholarship');
 
         }
     }
@@ -103,13 +131,14 @@ function Main(){
         
                 <Route path='/home' component={HomePage} />
                 <Route  path="/course" component={() => <Course courses={courses} loading = {loading}/>}  />
-                            <Route path="/student" component={() => <Student students={students} loading={loading} DeleteStudent={DeleteStudent}/>}  />
+                <Route path="/student" component={() => <Student students={students} loading={loading} DeleteStudent={DeleteStudent}/>}  />
                 <Route exact path="/editCourse/:id"  component={EditId} />
-                <Route exact path="/admin/viewCourse/:id" component={ViewId}/>
-                <Route  exact path="/admin/viewStudent/:id" component={ViewS}/>
+                <Route exact path="/admin/viewCourse/:id" component={viewCourse}/>
+                <Route  exact path="/admin/viewStudent/:id" component={viewStudent}/>
                 <Route exact path="/admin/editStudent/:id"  component={EditStudent} />
                 <Route exact path="/admin/addStudent"  component={() => <AddStudent />}/>
                 <Route path="/dashboard"  component={() => <Dashboard/>}/>
+                <Route path="/scholarship" component={() => <Scholarship scholarships={scholarships} AcceptScholarship={AcceptScholarship} RejectScholarship={RejectScholarship}/>}/>
                 <Route path="/insights" component={() => <Insights studentCount={studentCount} courseCount={courseCount}/>}/>
                 <Redirect to="/home" /> 
             </Switch>

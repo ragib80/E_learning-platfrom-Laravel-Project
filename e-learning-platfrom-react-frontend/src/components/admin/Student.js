@@ -21,10 +21,10 @@ function RenderCard({items,loading,DeleteStudent}) {
             <CardBody>
                 <CardTitle>{item.fullname}</CardTitle>
             <CardSubtitle>{item.address}</CardSubtitle> 
-                        <CardText>
-                                    <Link to={`viewStudent/${item.st_id}`} className="btn btn-primary btn sm">View</Link>|
-                                     <Link to={`editStudent/${item.st_id}`} className="btn btn-success btn sm">Edit</Link>|
-                      <button type="button" onClick={(e) => DeleteStudent(e, item.st_id)} className='btn btn-danger btn-sm'>Delete</button>                
+            <CardText>
+            <Link to={`/admin/viewStudent/${item.st_id}`} className="btn btn-primary btn sm">View</Link>|
+            <Link to={`/admin/editStudent/${item.st_id}`} className="btn btn-success btn sm">Edit</Link>|
+            <button type="button" onClick={(e) => DeleteStudent(e, item.st_id)} className='btn btn-danger btn-sm'>Delete</button>                
             </CardText>
             </CardBody>
                     </Card>
@@ -56,13 +56,11 @@ function Student(props) {
                     </Breadcrumb>
             <div className="row align-items">
                 <div className="col-6 col-md m-1">
-                    
-                                    <Link to={'addStudent'} className="btn btn-primary btn sm">Add Student</Link>
+                    <Link to={'addStudent'} className="btn btn-primary btn sm">Add Student</Link>
                       
                 </div>
                        <div className="col-6 col-md m-1">
-
-                                    <label className="search-label" htmlFor="search-input">
+                    <label className="search-label" htmlFor="search-input">
 					<input
 						type="text"
 						value=""

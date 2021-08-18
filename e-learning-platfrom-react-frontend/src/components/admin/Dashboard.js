@@ -37,7 +37,7 @@ function RenderDash() {
                     exitTransform: 'scale(0.5) translateY(-50%)'
                 }}>
             <Card className="m-3">
-               <CardImg width="100%" src="assets/images/course.jpg" alt="student" />
+               <CardImg width="100%" src="assets/images/course.jpg" alt="course" />
             <CardBody>
                 <CardTitle>Course</CardTitle>
             <CardSubtitle></CardSubtitle> 
@@ -69,7 +69,7 @@ function RenderDash() {
                     exitTransform: 'scale(0.5) translateY(-50%)'
                 }}>
             <Card className="m-3">
-               <CardImg width="100%" src="assets/images/instructor.svg" alt="student" />
+               <CardImg width="100%" src="assets/images/instructor.jpg" alt="instructor" />
             <CardBody>
                 <CardTitle>Instructors</CardTitle>
             <CardSubtitle></CardSubtitle> 
@@ -84,7 +84,7 @@ function RenderDash() {
                     exitTransform: 'scale(0.5) translateY(-50%)'
                 }}>
             <Card className="m-3">
-               <CardImg width="100%" src="assets/images/insights.jpg" alt="student" />
+               <CardImg width="100%" src="assets/images/insights.jpg" alt="insights" />
             <CardBody>
                 <CardTitle>Insights</CardTitle>
             <CardSubtitle></CardSubtitle> 
@@ -100,12 +100,12 @@ function RenderDash() {
                     exitTransform: 'scale(0.5) translateY(-50%)'
                 }}>
             <Card className="m-3">
-               <CardImg width="100%" src="assets/images/scholarship.png" alt="student" />
+               <CardImg width="100%" src="assets/images/scholarship.jpg" alt="scholarship" />
             <CardBody>
                 <CardTitle>Scholarship</CardTitle>
             <CardSubtitle></CardSubtitle> 
                 <CardText>
-                 <Link to={"/insights"} className="btn btn-primary btn sm">View</Link>
+                 <Link to={"/scholarship"} className="btn btn-primary btn sm">View</Link>
             </CardText>
             </CardBody>
                     </Card>

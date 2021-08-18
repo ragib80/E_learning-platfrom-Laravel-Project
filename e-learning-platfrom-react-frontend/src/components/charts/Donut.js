@@ -28,7 +28,7 @@ const renderTooltip = context => {
 
 
 // Show category label for each item in the donut graph
-const labelContent = e => e.category;
+const labelContent = e => (e.category + '\n'+ e.value + '%');
 
 const Donut = props => {
 const [studentCount, setStudentCount] = useState(0)
@@ -83,8 +83,7 @@ const applicationsStatusThisMonth = [
           type="donut"
           data={applicationsStatusThisMonth}
           categoryField="status"
-          field="value"
-        >
+          field="value">
           <ChartSeriesLabels
             color="#fff"
             background="none"

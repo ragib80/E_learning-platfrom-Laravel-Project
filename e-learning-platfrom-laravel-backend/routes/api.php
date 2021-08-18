@@ -60,6 +60,10 @@ Route::post('/admin/course/delete/{id}', 'AdminController@destroyCourse');
 Route::get('/admin/course/list/download_course_data', 'AdminController@sheetCourse')->name('course.sheet');
 Route::get('/admin/course/list/search', 'AdminController@searchCourse')->name('course.search');
 
+Route::get('/admin/scholarship/list', 'AdminController@listScholarship')->name('scholarship.list');
+Route::post('/admin/scholarship/accept/{id}', 'AdminController@acceptScholarship');
+Route::post('/admin/scholarship/reject/{id}', 'AdminController@rejectScholarship');
+
 Route::post('/files', 'AdminController@data');
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {

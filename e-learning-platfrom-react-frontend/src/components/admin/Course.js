@@ -16,13 +16,13 @@ function RenderCard({items,loading}) {
                 <div className="col-12 col-md-3">
                 
         <Card className="m-3">
-               <CardImg width="100%" src={item.image} alt={item.name} />
+               <CardImg width="100%" src={item.image} alt={item.c_name} />
             <CardBody>
-                <CardTitle>{item.name}</CardTitle>
-            {item.designation ? <CardSubtitle>{item.designation}</CardSubtitle> : null }
+                <CardTitle>{item.c_name}</CardTitle>
+            {item.type ? <CardSubtitle>{item.type}</CardSubtitle> : null }
                                  <CardText>
-                            <Link to={`viewCourse/${item.id}`} className="btn btn-primary btn sm">View</Link>|
-                            <button type="button" onClick={(e) => this.deleteStudent(e, item.id)} className='btn btn-danger btn-sm'>Deactivate</button>
+                            <Link to={`admin/viewCourse/${item.c_id}`} className="btn btn-primary btn sm">View</Link>|
+                            <button type="button" onClick={(e) => this.deleteStudent(e, item.c_id)} className='btn btn-danger btn-sm'>Deactivate</button>
                             
             </CardText>
             </CardBody>

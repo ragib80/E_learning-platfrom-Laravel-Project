@@ -37,6 +37,7 @@
 .monospace {
   font-family: 'Droid Sans Mono', monospace;
 }
+
 body {
   font-family: 'Roboto', sans-serif;
   font-weight: 300;
@@ -51,6 +52,7 @@ strong {
   font-weight: bold;
   /* Or 700 */
 }
+
 .row-header {
   margin: 0px auto;
   padding: 0px auto;
@@ -117,6 +119,7 @@ address {
   color: #555;
   right: 5px;
 }
+
 .page-enter {
   opacity: 0.01;
   transform: translateX(-100%);
@@ -138,13 +141,22 @@ address {
   transform: translateX(100%);
   transition: all 600ms ease-out;
 }
-p{
+
+p {
   font-family: 'Roboto',
-  sans-serif;
+    sans-serif;
   font-weight: 300;
 }
-
 
 .section {
   padding: 50px 0;
 }
+ table {
+   table-layout: fixed;
+   word-wrap: break-word;
+ }
+
+ table th,
+ table td {
+   overflow: hidden;
+ }
