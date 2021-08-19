@@ -41,6 +41,8 @@
 body {
   font-family: 'Roboto', sans-serif;
   font-weight: 300;
+  
+  /* background-image: url('assets/images/background.svg'); */
   /* ... */
 }
 
@@ -52,7 +54,10 @@ strong {
   font-weight: bold;
   /* Or 700 */
 }
-
+h1{
+  font-weight: bold;
+  color: #18265b;
+}
 .row-header {
   margin: 0px auto;
   padding: 0px auto;
@@ -66,7 +71,8 @@ strong {
 }
 
 .footer {
-  background-color: #c4d0e9;
+  background-color: #e9ecef;
+   color: #18265b;
   margin: 0px auto;
   padding: 20px 0px 20px 0px;
 }
@@ -74,18 +80,34 @@ strong {
 .jumbotron {
   padding: 70px 30px 70px 30px;
   margin: 0px auto;
-  background: #2933be;
-  color: floralwhite;
+  /* background: #2933be; */
+ color: #18265b;
 }
 
 address {
   font-size: 80%;
   margin: 0px;
-  color: #0f0f0f;
+   color: #18265b;
+}
+.map{
+ width: 400px;
+ height: 300px;
+ border: 0px;
+}
+.nav-link{
+color: #18265b;
+
 }
 
-.navbar-dark {
-  background-color: #060693;
+.navbar{
+  background-color: #e9ecefa2;
+  color: #18265b;
+  
+}
+.btn-log{
+  background-color: #99a7b57a;
+  color: #18265b;
+  
 }
 
 

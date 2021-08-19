@@ -14,6 +14,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::post('/login', 'LoginController@verify');
+
 Route::get('/student', 'StudentController@index')->name('student.index');
 Route::get('/profile/{id}', 'AdminController@profile')->name('profile');
 Route::get('/notice/list', 'AdminController@noticeList')->name('notice');
@@ -66,6 +68,12 @@ Route::post('/admin/scholarship/reject/{id}', 'AdminController@rejectScholarship
 
 Route::post('/admin/course/activate/{id}', 'AdminController@activateCourse');
 Route::post('/admin/course/deactivate/{id}', 'AdminController@deactivateCourse');
+
+Route::post('/admin/student/activate/{id}', 'AdminController@activateStudent');
+Route::post('/admin/student/deactivate/{id}', 'AdminController@deactivateStudent');
+
+Route::post('/admin/instructor/activate/{id}', 'AdminController@activateInstructor');
+Route::post('/admin/instructor/deactivate/{id}', 'AdminController@deactivateInstructor');
 
 Route::post('/files', 'AdminController@data');
 

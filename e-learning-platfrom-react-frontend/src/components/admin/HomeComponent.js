@@ -1,39 +1,38 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Card, CardImg, CardText, CardBody,
+import { Card, CardImg, CardText, CardBody,Button,
     CardTitle, CardSubtitle,Jumbotron
 } from 'reactstrap';
 import { FadeTransform } from 'react-animation-components';
-function RenderCourse({items,loading}) {
-    var course = "";
 
-        if (loading) {
-            course =
-                 <div className="col-12 col-md-3"> <img width="100%" src="assets/images/loading.gif" alt="loading" /></div>
-               
+    
+function RenderCourse({items,loading,status,DeleteCourse,DeactivateCourse,ActivateCourse}) {
+    var data = "";
+
+          if (loading) {
+            data = <div className="col-12 col-md-3"> <img width="100%" src="assets/images/loading.gif" alt="loading" /></div>
+
         }
         else {
-            course = items.map((item) => {
-                return (
-                    <div className="col-12 col-md-3">
-                         <FadeTransform
-                            in
-                            transformProps={{
-                                exitTransform: 'scale(0.5) translateY(-50%)'
-                            }}>
-                    <Card className="m-3">
+            data = items.map((item) => {
+            return (
+                <div className="col-12 col-md-3">
+                
+        <Card className="m-3">
                <CardImg width="100%" src={item.image} alt={item.c_name} />
             <CardBody>
                 <CardTitle>{item.c_name}</CardTitle>
             {item.type ? <CardSubtitle>{item.type}</CardSubtitle> : null }
-                        <CardText>
-                        <Link to={`viewCourse/${item.c_id}`} className="btn btn-primary btn sm">View</Link>|
-                      <button type="button" onClick={(e) => this.deleteStudent(e, item.c_id)} className='btn btn-danger btn-sm'>Deactivate</button>                
+                                 <CardText>
+                            <Link to={`/admin/viewCourse/${item.c_id}`} className="btn btn-primary btn sm">View</Link>
+                                {status === "Deactivate" ? <Button type="button" onClick={(e) => DeactivateCourse(e, item.c_id)} className='btn btn-danger m-2'>{status}</Button>
+                                    : <React.Fragment><Button type="button" onClick={(e) => ActivateCourse(e, item.c_id)} className='btn btn-success m-1'>{status}</Button> 
+                                <Button type="button" onClick={(e) => DeleteCourse(e, item.c_id)} className='btn btn-danger'>Delete</Button> </React.Fragment>}
+                            
             </CardText>
             </CardBody>
         </Card>
-                    </FadeTransform>
-                </div>);
+            </div>);
  
         });
     }
@@ -41,43 +40,40 @@ function RenderCourse({items,loading}) {
     return (
         <div className="container">
             <div className="row">
-                    {course}
+                    {data}
             </div>
         </div>
         
-        )
-        
-}
-function RenderStudent({ items, loading }) {
-    var student = "";
+    )
 
-        if (loading) {
-            student = <div className="col-12 col-md-3"> <img width="100%" src="assets/images/loading.gif" alt="loading" /></div>
+}
+function RenderStudent({items,status,loading,DeleteStudent,DeactivateStudent,ActivateStudent}) {
+    var data = "";
+
+          if (loading) {
+            data =  <div className="col-12 col-md-3"> <img width="100%" src="assets/images/loading.gif" alt="loading" /></div>
 
         }
         else {
-            student = items.map((item) => {
-                return (
-                    <div className="col-12 col-md-3">
-                           <FadeTransform
-                            in
-                            transformProps={{
-                                exitTransform: 'scale(0.5) translateY(-50%)'
-                            }}>
-                    <Card className="m-3">
+            data = items.map((item) => {
+            return (
+              <div className="col-12 col-md-3">
+                   
+                   <Card className="m-3">
                <CardImg width="100%" src={item.image} alt={item.username} />
             <CardBody>
                 <CardTitle>{item.fullname}</CardTitle>
             <CardSubtitle>{item.address}</CardSubtitle> 
-                        <CardText>
-                                    <Link to={`/admin/viewStudent/${item.st_id}`} className="btn btn-primary btn sm">View</Link>|
-                                     <Link to={`/admin/editStudent/${item.st_id}`} className="btn btn-success btn sm">Edit</Link>|
-                      <button type="button" onClick={(e) => this.deleteStudent(e, item.id)} className='btn btn-danger btn-sm'>Delete</button>                
+            <CardText>
+            <Link to={`/admin/viewStudent/${item.st_id}`} className="btn btn-primary btn-md">View</Link>
+                                {status === "Deactivate" ? <React.Fragment> <Button type="button" onClick={(e) => DeactivateStudent(e, item.c_id)} className='btn btn-md btn-danger m-1'>{status}</Button>
+            <Link to={`/admin/editStudent/${item.st_id}`} className="btn btn-success btn-md">Edit</Link> </React.Fragment>
+                                    : <React.Fragment><Button type="button" onClick={(e) => ActivateStudent(e, item.c_id)} className='btn btn-success m-1'>{status}</Button>
+                                        <Button type="button" onClick={(e) => DeleteStudent(e, item.c_id)} className='btn btn-danger'>Delete</Button> </React.Fragment>}
             </CardText>
             </CardBody>
-                            </Card>
-                            </FadeTransform>
-                        </div>);
+                    </Card>
+                    </div>);
  
         });
     }
@@ -85,19 +81,60 @@ function RenderStudent({ items, loading }) {
     return (
         <div className="container">
             <div className="row">
-                    {student}
+                    {data}
             </div>
         </div>
         
-        )
-        
+    )
+
+}
+function RenderInstructor({items,status,loading,DeleteInstructor,DeactivateInstructor,ActivateInstructor}) {
+    var data = "";
+
+          if (loading) {
+            data =  <div className="col-12 col-md-3"> <img width="100%" src="assets/images/loading.gif" alt="loading" /></div>
+
+        }
+        else {
+            data = items.map((item) => {
+            return (
+              <div className="col-12 col-md-3">
+                   
+                   <Card className="m-3">
+               <CardImg width="100%" src={item.image} alt={item.username} />
+            <CardBody>
+                <CardTitle>{item.fullname}</CardTitle>
+            <CardSubtitle>{item.address}</CardSubtitle> 
+            <CardText>
+            <Link to={`/admin/viewInstructor/${item.i_id}`} className="btn btn-primary btn-md">View</Link>
+                                {status === "Deactivate" ? <React.Fragment> <Button type="button" onClick={(e) => DeactivateInstructor(e, item.i_id)} className='btn btn-md btn-danger m-1'>{status}</Button>
+            <Link to={`/admin/editInstructor/${item.i_id}`} className="btn btn-success btn-md">Edit</Link> </React.Fragment>
+                                    : <React.Fragment><Button type="button" onClick={(e) => ActivateInstructor(e, item.i_id)} className='btn btn-success m-1'>{status}</Button>
+                                        <Button type="button" onClick={(e) => DeleteInstructor(e, item.i_id)} className='btn btn-danger'>Delete</Button> </React.Fragment>}
+            </CardText>
+            </CardBody>
+                    </Card>
+                    </div>);
+ 
+        });
     }
+
+    return (
+        <div className="container">
+            <div className="row">
+                    {data}
+            </div>
+        </div>
+        
+    )
+
+}
     function Home(props) {
         console.log(props.students);
     return (
             <div>
-                <Jumbotron>
-                    <div className="container">
+            <Jumbotron>
+                <div className="container">
                         <div className="row row-header">
                             <div className="col-12 col-sm-6">
                                 <h1 className="humanist">E-Learning</h1>
@@ -110,19 +147,31 @@ function RenderStudent({ items, loading }) {
                     </div>
                 </Jumbotron>
                 <div className="container">
+                <div className="mb-1" style={{
+                    backgroundImage: `url(${process.env.PUBLIC_URL
+          + "assets/images/background2.svg"})`,
+          width: "100%", backgroundRepeat: "no-repeat", backgroundPosition: "center",backgroundAttachment: "fixed",backgroundSize:"cover",
+       
+    }} >
                     <div className="row align-items">
-                            <h1 className="humanist">Courses</h1>
-                            <RenderCourse items={props.courses} loading={props.loading} />
+                            <h1 className="humanist pl-3">Courses</h1>
+                <RenderCourse items={props.courses} loading={props.loading} status={props.status} DeleteCourse={props.DeleteCourse}  DeactivateCourse={props.DeactivateCourse} ActivateCourse={props.ActivateCourse}/>
                         
                      </div>
                     <div className="row align-items">
-                            <h1  className="humanist">Students</h1>
-                            <RenderStudent items={props.students} loading={props.loading} />
+                            <h1  className="humanist pl-3">Students</h1>
+                <RenderStudent items={props.students} status={props.status} loading={props.loading} DeleteStudent={props.DeleteStudent} DeactivateStudent={props.DeactivateStudent} ActivateStudent={props.ActivateStudent}/>
                         
                     </div>
+                    <div className="row align-items">
+                            <h1  className="humanist pl-3">Instructors</h1>
+                <RenderInstructor items={props.instructors} status={props.status} loading={props.loading} DeleteInstructor={props.DeleteInstructor} DeactivateInstructor={props.DeactivateInstructor} ActivateInstructor={props.ActivateInstructor}/>
+                        
+                    </div>
+
             </div>
             </div>
-    
+    </div>
     );
     }
 

@@ -26,7 +26,7 @@ function RenderDash() {
                 <CardTitle>Student</CardTitle>
             <CardSubtitle>Here You Can See All Students Information</CardSubtitle> 
                 <CardText>
-                 <Link to={"/student"} className="btn btn-primary btn-md mt-2">View</Link>
+                 <Link to={"/studentList"} className="btn btn-primary btn-md mt-2">View</Link>
             </CardText>
             </CardBody>
                 </Card>
@@ -74,7 +74,7 @@ function RenderDash() {
                 <CardTitle>Instructors</CardTitle>
             <CardSubtitle>Here You Can See All Instructors Information</CardSubtitle> 
                 <CardText>
-                 <Link to={"/instructors"} className="btn btn-primary btn-md mt-2">View</Link>
+                 <Link to={"/instructorList"} className="btn btn-primary btn-md mt-2">View</Link>
             </CardText>
             </CardBody>
                     </Card>
@@ -126,11 +126,16 @@ const Dashboard = () => {
             }
     return (
             <div className="container">
-
+    <div style={{
+      backgroundImage: `url(${process.env.PUBLIC_URL
+          + "assets/images/background1.svg"})`,
+      height: "100%", backgroundRepeat: "no-repeat"
+    }} >
                 <div className='row'>
                    {dashItem}
             </div>
             </div>
+    </div>
             )
         }
  

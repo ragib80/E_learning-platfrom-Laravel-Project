@@ -33,6 +33,8 @@ const labelContent = e => (e.category + '\n'+ e.value + '%');
 const Donut = props => {
 const [studentCount, setStudentCount] = useState(0)
 const [courseCount, setCourseCount] = useState(0)
+const [stuffCount, setStuffCount] = useState(0)
+const [instructorCount, setInstructorCount] = useState(0)
 const [loading, setLoading] = useState(true);
   useEffect(() => {
   const loadCount = () => axios.get('http://localhost:8000/api/admin')
@@ -40,6 +42,8 @@ const [loading, setLoading] = useState(true);
       console.log(response);
       setStudentCount(response.data.students);
       setCourseCount(response.data.courses);
+      setStuffCount(response.data.stuffs);
+      setInstructorCount(response.data.instructors);
       setLoading(false);
     });
   loadCount();
@@ -55,6 +59,16 @@ const applicationsStatusThisMonth = [
     status: "Students",
     value: studentCount ,
     color: COLORS.students,
+  } ,
+  {
+    status: "Instructors",
+    value: instructorCount ,
+    color: COLORS.instructors,
+  },  
+  {
+    status: "Stuffs",
+    value: stuffCount ,
+    color: COLORS.stuffs,
   }
   ];
     // Store reference to the Kendo <Chart> component

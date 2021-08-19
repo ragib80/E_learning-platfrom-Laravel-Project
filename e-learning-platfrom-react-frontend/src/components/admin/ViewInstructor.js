@@ -6,20 +6,20 @@ import { Link,useHistory } from 'react-router-dom';
 import axios from 'axios';
 import { FadeTransform, Fade, Stagger } from 'react-animation-components';
 
-function RenderStudent({ student,loading}) {
+function RenderInstructor({ instructor,loading}) {
       if (loading) {
            return <img width="100%" src="assets/images/loading.gif" alt="loading"/>
         }
-        if (student != null) {
+        if (instructor != null) {
             return (
                 <div className="container">
                 <div className="row">
                     <Breadcrumb>
-                        <BreadcrumbItem><Link to="/studentList">Student List</Link></BreadcrumbItem>
-                            <BreadcrumbItem active>{student.fullname}</BreadcrumbItem>
+                        <BreadcrumbItem><Link to="/instructorList">Instructor List</Link></BreadcrumbItem>
+                            <BreadcrumbItem active>{instructor.fullname}</BreadcrumbItem>
                     </Breadcrumb>
                     <div className="col-12">
-                            <h3>{student.title}</h3>
+                            <h3>{instructor.title}</h3>
                         <hr />
                     </div>                
                 </div>
@@ -28,19 +28,19 @@ function RenderStudent({ student,loading}) {
                                         <FadeTransform in transformProps={{
                     exitTransform: 'scale(0.5) translateY(-50%)'
                 }}>
-                                <img width="100%" src={student.image} alt={student.title} />
+                                <img width="100%" src={instructor.image} alt={instructor.title} />
                                 </FadeTransform>
                         </div>
                         <div className='col-12 col-md-5 m-1'>
                                 <Stagger in>
                                 <CardBody>
                                     <Fade in>
-                                <CardTitle>{student.fullname}</CardTitle>
-                                <CardText> {student.address}
+                                <CardTitle>{instructor.fullname}</CardTitle>
+                                <CardText> {instructor.address}
                                 </CardText>   <CardText> 
-                                    {student.country}
+                                    {instructor.country}
                                 </CardText>   <CardText> 
-                                    {student.c_id}
+                                    {instructor.c_id}
                                         </CardText>
                                         </Fade>
                                 </CardBody>
@@ -53,28 +53,28 @@ function RenderStudent({ student,loading}) {
             );
     }
     
-        if (student == null) {
+        if (instructor == null) {
             return (<div></div>)
         }
     }
 
-const ViewStudent = (props) => {
+const ViewInstructor = (props) => {
 
-    const student = props.students;
+    const instructor = props.instructors;
     const loading = props.loading
-    console.log(student);
+    console.log(instructor);
 
   
-    const studentItem = <RenderStudent student={student} loading={loading} />
+    const instructorItem = <RenderInstructor instructor={instructor} loading={loading} />
         
-            if (studentItem == null) {
+            if (instructorItem == null) {
                 return (<div></div>);
             }
     return (
             <div className="container">
 
                 <div className='row'>
-                   {studentItem}
+                   {instructorItem}
             </div>
             </div>
             )
@@ -82,4 +82,4 @@ const ViewStudent = (props) => {
  
 
 
-export default ViewStudent;
+export default ViewInstructor;

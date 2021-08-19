@@ -7,7 +7,7 @@ import axios from 'axios';
 import { FadeTransform, Fade, Stagger } from 'react-animation-components';
 import Donut from '../charts/Donut';
 import Bar from '../charts/Bar';
-function RenderDash({studentCount,courseCount}) {
+function RenderDash({studentCount,courseCount,instructorCount,stuffCount}) {
     //   if (loading) {
     //        return <img width="100%" src="assets/images/loading.gif" alt="loading"/>
     //     }
@@ -53,8 +53,8 @@ function RenderDash({studentCount,courseCount}) {
             <Card className="m-3">
 
             <CardBody>
-                            <CardTitle className="display text-center">{studentCount}</CardTitle>
-            <CardSubtitle className="text-center">Total Student</CardSubtitle>
+                            <CardTitle className="display text-center">{instructorCount}</CardTitle>
+            <CardSubtitle className="text-center">Total Instructor</CardSubtitle>
                 <CardText>
             </CardText>
             </CardBody>
@@ -68,8 +68,8 @@ function RenderDash({studentCount,courseCount}) {
             <Card className="m-3">
 
             <CardBody>
-                            <CardTitle className="display text-center">{studentCount}</CardTitle>
-            <CardSubtitle className="text-center">Total Student</CardSubtitle>
+                            <CardTitle className="display text-center">{stuffCount}</CardTitle>
+            <CardSubtitle className="text-center">Total Stuff</CardSubtitle>
                 <CardText>
             </CardText>
             </CardBody>
@@ -111,7 +111,7 @@ function RenderDash({studentCount,courseCount}) {
     }
 const Insights = (props) => {
 
-    const insightsItem = <RenderDash studentCount={props.studentCount} courseCount={props.courseCount}/>
+    const insightsItem = <RenderDash studentCount={props.studentCount} courseCount={props.courseCount} instructorCount={props.instructorCount} stuffCount={props.stuffCount}/>
 
             if (insightsItem == null) {
                 return (<div></div>);

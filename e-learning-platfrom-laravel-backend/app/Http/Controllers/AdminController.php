@@ -116,6 +116,28 @@ class AdminController extends Controller
         ]);
         // return view('user.list')->with('userList', $users);
     }
+    public function activateStudent(Request $req, $id)
+    {
+        $students = Student::find($id);
+        $students->status = "active";
+        $students->save();
+        return response()->json([
+            'status' => 200,
+            'courses' =>   $students
+
+        ]);
+    }
+    public function deactivateStudent(Request $req, $id)
+    {
+        $students = Student::find($id);
+        $students->status = "deactive";
+        $students->save();
+        return response()->json([
+            'status' => 200,
+            'courses' =>   $students
+
+        ]);
+    }
     public function deleteStudent($id)
     {
 
@@ -253,12 +275,20 @@ class AdminController extends Controller
     public function listInstructor()
     {
         $instructors = Instructor::all();
-        return view('admin.instructor.list')->with('instructors', $instructors);
+        return response()->json([
+            'status' => 200,
+            'instructors' =>   $instructors
+
+        ]);
     }
     public function detailsInstructor($id)
     {
         $instructors = Instructor::find($id);
-        return view('admin.instructor.details')->with('instructor', $instructors);
+        return response()->json([
+            'status' => 200,
+            'instructors' =>   $instructors
+
+        ]);
     }
 
     public function editInstructor($id)
@@ -269,17 +299,20 @@ class AdminController extends Controller
 
     public function updateInstructor(UpdateInstructorRequest $req, $id)
     {
-        $instructor = Instructor::find($id);
-        $instructor->fullname = $req->name;
+        $instructors = Instructor::find($id);
+        $instructors->fullname = $req->fullname;
         // $user->password = $req->password;
-        $instructor->email = $req->email;
-        $instructor->p_num = $req->phone;
-        $instructor->c_id = $req->course_id;
-        $instructor->address = $req->address;
+        $instructors->email = $req->email;
+        $instructors->p_num = $req->p_num;
+        $instructors->c_id = $req->c_id;
+        $instructors->address = $req->address;
         // $user->type = $req->type;
-        $instructor->save();
-        return redirect()->route('instructor.list');
-        // return view('user.list')->with('userList', $users);
+        $instructors->save();
+        return response()->json([
+            'status' => 200,
+            'instructors' =>   $instructors
+
+        ]);
     }
     public function deleteInstructor($id)
     {
@@ -291,11 +324,35 @@ class AdminController extends Controller
 
     public function destroyInstructor(Request $req, $id)
     {
-
         Instructor::destroy($id);
-        return redirect()->route('instructor.list');
-    }
+        return response()->json([
+            'status' => 200,
+            'message' => "Deleted  Succesfully",
 
+        ]);
+    }
+    public function activateInstructor(Request $req, $id)
+    {
+        $instructors = Instructor::find($id);
+        $instructors->status = "active";
+        $instructors->save();
+        return response()->json([
+            'status' => 200,
+            'instructors' => $instructors
+
+        ]);
+    }
+    public function deactivateInstructor(Request $req, $id)
+    {
+        $instructors = Instructor::find($id);
+        $instructors->status = "deactive";
+        $instructors->save();
+        return response()->json([
+            'status' => 200,
+            'instructors' => $instructors
+
+        ]);
+    }
 
 
     /**
@@ -483,8 +540,11 @@ class AdminController extends Controller
         $courses = Course::find($id);
         $courses->status = "active";
         $courses->save();
-        return redirect()->route('course.list');
-        // return view('user.list')->with('userList', $users);
+        return response()->json([
+            'status' => 200,
+            'courses' => $courses
+
+        ]);
     }
     public function deactivateCourse(Request $req, $id)
     {

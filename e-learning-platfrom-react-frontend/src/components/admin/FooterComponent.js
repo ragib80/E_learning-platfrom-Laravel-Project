@@ -22,7 +22,6 @@ function Footer(props) {
 		              B-Block, Chandgaun Abashik<br />
 		              Bangladesh<br />
 		              <i className="fa fa-phone fa-lg"></i>: +880 1234 5678<br />
-		              <i className="fa fa-fax fa-lg"></i>: +880 8765 4321<br />
 		              <i className="fa fa-envelope fa-lg"></i>: <a href="mailto:e-learning@mail.net">
                          e-learning@mail.net</a>
                     </address>

@@ -33,7 +33,7 @@ class Header extends Component {
     async handleLogin(event) {
         event.preventDefault();
         const $data = {
-            username: this.username.value,
+            email: this.email.value,
             password: this.password.value
         }
         this.toggleModal();
@@ -42,7 +42,7 @@ class Header extends Component {
         if (res.data.status === 200) {
             this.setState({
                 isLoggedIn: !this.state.isLoggedIn,
-                name: $data.username
+                name: $data.email
             })
         }
         else {
@@ -63,7 +63,7 @@ class Header extends Component {
                         Hi,{this.state.name}
 </div>
                     <NavItem>
-                        <Button onClick={this.toggleModal} color="white" className="btn btn-primary"><span className="fa fa-sign-out fa-lg"></span>Logout</Button>
+                        <Button onClick={this.toggleModal} color="white" className="btn btn-log"><span className="fa fa-sign-out fa-lg"></span>Logout</Button>
                     </NavItem>
                 </Nav>);
         }
@@ -72,7 +72,7 @@ class Header extends Component {
              
                  <Nav className="ml-auto" navbar>
                     <NavItem>
-                        <Button onClick={this.toggleModal} color="white" className="btn btn-primary"><span className="fa fa-sign-in fa-lg"></span>Login</Button>
+                        <Button onClick={this.toggleModal} color="white" className="btn btn-log"><span className="fa fa-sign-in fa-lg"></span>Login</Button>
                     </NavItem>
                 </Nav>);
         }
@@ -80,7 +80,7 @@ class Header extends Component {
     render() {
         return(
             <div>
-                <Navbar dark expand="md">
+                <Navbar className="navbar"expand="md">
                     <div className="container">
                         <NavbarToggler onClick={this.toggleNav} />
                         <NavbarBrand className="mr-auto" href="/"><img src='assets/images/e-learning.svg' height="30" width="41" alt='E-Learning' /></NavbarBrand>
@@ -112,9 +112,9 @@ class Header extends Component {
                     <ModalBody>
                       <Form onSubmit={this.handleLogin}>
                             <FormGroup>
-                                <Label htmlFor="username">Username</Label>
-                                <Input type="text" id="username" name="username"
-                                    innerRef={(input) => this.username = input} />
+                                <Label htmlFor="email">Username</Label>
+                                <Input type="text" id="email" name="email"
+                                    innerRef={(input) => this.email = input} />
                             </FormGroup>
                             <FormGroup>
                                 <Label htmlFor="password">Password</Label>

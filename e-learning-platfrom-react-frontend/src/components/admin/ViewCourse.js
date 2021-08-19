@@ -15,7 +15,7 @@ function RenderCourse({ course,loading }) {
                 <div className="container">
                 <div className="row">
                     <Breadcrumb>
-                        <BreadcrumbItem><Link to="/course">Course</Link></BreadcrumbItem>
+                        <BreadcrumbItem><Link to="/courseList">Course List</Link></BreadcrumbItem>
                             <BreadcrumbItem active>{course.c_name}</BreadcrumbItem>
                     </Breadcrumb>
                     <div className="col-12">

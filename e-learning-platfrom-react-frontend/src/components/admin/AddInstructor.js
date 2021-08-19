@@ -8,22 +8,22 @@ import { Link } from 'react-router-dom';
 
 
 
-function RenderStudent({ student, loading,handleInputChange,handleSubmit,msg }) {
+function RenderInstructor({ instructor, loading,handleInputChange,handleSubmit,msg }) {
     if (loading) {
         return <img width="100%" src="assets/images/loading.gif" alt="loading" />
     }
     else {
-        if (student != null) {
+        if (instructor != null) {
             return (
 
                 <div className="container">
                     <div className="row">
                         <Breadcrumb>
-                            <BreadcrumbItem><Link to="/studentList">student List</Link></BreadcrumbItem>
-                            <BreadcrumbItem active>{student.fullname}</BreadcrumbItem>
+                            <BreadcrumbItem><Link to="/instructorList">instructor List</Link></BreadcrumbItem>
+                            <BreadcrumbItem active>{instructor.fullname}</BreadcrumbItem>
                         </Breadcrumb>
                         <div className="col-12">
-                            <h3>Edit student</h3>
+                            <h3>Edit instructor</h3>
                             <hr />
                         </div>
                     </div>
@@ -39,7 +39,7 @@ function RenderStudent({ student, loading,handleInputChange,handleSubmit,msg }) 
                                     <Col md={10}>
                                         <Input type="text" id="fullname" name="fullname"
                                             placeholder="Full Name"
-                                            value={student.fullname}
+                                            value={instructor.fullname}
                                             onChange={handleInputChange} />
                                     </Col>
                                 </FormGroup>
@@ -48,7 +48,7 @@ function RenderStudent({ student, loading,handleInputChange,handleSubmit,msg }) 
                                     <Col md={10}>
                                         <Input type="text" id="address" name="address"
                                             placeholder="Address"
-                                            value={student.address}
+                                            value={instructor.address}
                                             onChange={handleInputChange} />
                                     </Col>
                                 </FormGroup>
@@ -57,7 +57,7 @@ function RenderStudent({ student, loading,handleInputChange,handleSubmit,msg }) 
                                     <Col md={10}>
                                         <Input type="text" id="country" name="country"
                                             placeholder="Country"
-                                            value={student.country}
+                                            value={instructor.country}
                                             onChange={handleInputChange} />
                                     </Col>
                                 </FormGroup>
@@ -66,7 +66,7 @@ function RenderStudent({ student, loading,handleInputChange,handleSubmit,msg }) 
                                     <Col md={10}>
                                         <Input type="text" id="p_num" name="p_num"
                                             placeholder="Phone"
-                                            value={student.p_num}
+                                            value={instructor.p_num}
                                             onChange={handleInputChange} />
                                     </Col>
                                 </FormGroup>     
@@ -75,7 +75,7 @@ function RenderStudent({ student, loading,handleInputChange,handleSubmit,msg }) 
                                     <Col md={10}>
                                         <Input type="text" id="c_id" name="c_id"
                                             placeholder="Course Id"
-                                            value={student.c_id}
+                                            value={instructor.c_id}
                                             onChange={handleInputChange} />
                                     </Col>
                                 </FormGroup>
@@ -91,10 +91,10 @@ function RenderStudent({ student, loading,handleInputChange,handleSubmit,msg }) 
                         </div>
                         <div className="col-12 col-md-4">
                             <Card className="mr-3">
-                                <CardImg width="100%" src={student.image} alt={student.username} />
+                                <CardImg width="100%" src={instructor.image} alt={instructor.username} />
                                 <CardBody>
-                                    <CardTitle>{student.fullname}</CardTitle>
-                                   <CardSubtitle>{student.address}</CardSubtitle> 
+                                    <CardTitle>{instructor.fullname}</CardTitle>
+                                   <CardSubtitle>{instructor.address}</CardSubtitle> 
                                     <CardText>
 
                                     </CardText>
@@ -108,13 +108,13 @@ function RenderStudent({ student, loading,handleInputChange,handleSubmit,msg }) 
             )
         }
     }
-           if (student == null) {
+           if (instructor == null) {
             return (<div></div>)
         }
     }
-const AddStudent = (props) => {
+const AddInstructor = (props) => {
     const { id } = useParams();
-    const [student, setStudent] = useState(props.students);
+    const [instructor, setInstructor] = useState(props.instructors);
     const history = useHistory();
     const [loading, setLoading] = useState(props.loading);
     const [msg, setMessage] = useState('');
@@ -123,36 +123,36 @@ const AddStudent = (props) => {
     const handleInputChange = (e) => {
         const attr = e.target.name;
         const val = e.target.value;
-        setStudent({ ...student, [attr]: val });
+        setInstructor({ ...instructor, [attr]: val });
     }
     const handleSubmit = (e) => {
         e.preventDefault();
    
-        axios.put(`http://127.0.0.1:8000/api/admin/student/edit/${id}`, student)
+        axios.post(`http://127.0.0.1:8000/api/admin/instructor/edit/${id}`, instructor)
             .then(response => {
                 setMessage("updated")
               
+                history.push('/instructorList');
 
-            }).catch((err) => {
+            }).catch((error) => {
                 setMessage("error")
             })
-            history.push('/studentList');
 
         }
 
-    const studentItem = <RenderStudent student={student} loading={loading} handleInputChange={handleInputChange} handleSubmit={handleSubmit} msg={msg} />
+    const instructorItem = <RenderInstructor instructor={instructor} loading={loading} handleInputChange={handleInputChange} handleSubmit={handleSubmit} msg={msg} />
         
-            if (studentItem == null) {
+            if (instructorItem == null) {
                 return (<div></div>);
             }
     return (
             <div className="container">
 
                 <div className='row'>
-                   {studentItem}
+                   {instructorItem}
             </div>
             </div>
             )
         }
 
-export default AddStudent;
+export default AddInstructor;

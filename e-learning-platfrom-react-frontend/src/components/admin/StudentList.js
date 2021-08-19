@@ -11,13 +11,12 @@ function RenderCard() {
         <div className="col-12 col-md-4">
                 
             <Card className="m-3 p-2">
-                <CardImg width="100%" src="assets/images/active_course.jpg" alt="active course" />
+                <CardImg width="100%" src="assets/images/student-active.png" alt="active student" />
                 <CardBody>
-                    <CardTitle>Active Courses</CardTitle>
-                    <CardSubtitle>Here You Can See All Active Courses</CardSubtitle>
+                    <CardTitle>Active Students</CardTitle>
+                    <CardSubtitle>Here You Can See All Active Students</CardSubtitle>
                     <CardText>
-                        <Link to={'/admin/active-course'} className="btn btn-primary btn sm">View</Link>
-                            
+                        <Link to={'/admin/active-student'} className="btn btn-primary btn sm mt-2">View</Link>
                     </CardText>
                 </CardBody>
             </Card>
@@ -25,12 +24,12 @@ function RenderCard() {
             <div className="col-12 col-md-4">
                 
             <Card className="m-3 p-2">
-                <CardImg width="100%" src="assets/images/deactive-course.jpg" alt="deactive course" />
+                <CardImg width="100%" src="assets/images/student-deactive.png" alt="deactive student" />
                 <CardBody>
-                    <CardTitle>Deactive Courses</CardTitle>
-                    <CardSubtitle>Here You Can See All Deactive Courses</CardSubtitle>
+                    <CardTitle>Deactive Students</CardTitle>
+                    <CardSubtitle>Here You Can See All Deactive Students</CardSubtitle>
                     <CardText>
-                        <Link to={'/admin/deactive-course'} className="btn btn-primary btn sm">View</Link>
+                        <Link to={'/admin/deactive-student'} className="btn btn-primary btn sm mt-2">View</Link>
                             
                     </CardText>
                 </CardBody>
@@ -40,29 +39,22 @@ function RenderCard() {
  
 }
 
-function CourseList() {
+function StudentList() {
     
     return (
         <div className="container">
             <div className="row align-items-start">
                          <Breadcrumb>
                         <BreadcrumbItem><Link to="/dashboard">Dashboard</Link></BreadcrumbItem>
-                            <BreadcrumbItem active>Course List</BreadcrumbItem>
+                        <BreadcrumbItem active>Student List</BreadcrumbItem>
                     </Breadcrumb>
             </div>
-            <div className="mb-1" style={{
-      backgroundImage: `url(${process.env.PUBLIC_URL
-          + "assets/images/background4.jpg"})`,
-                width: "100%", backgroundRepeat: "no-repeat", backgroundPosition: "center", backgroundSize: "cover",
-       
-    }} >
             <div className="row align-items-start">
                     <RenderCard/>
             </div>
-            </div>
-            </div>
+        </div>
     );
     }
 
  
-export default CourseList;
+export default StudentList;

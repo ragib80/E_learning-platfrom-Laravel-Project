@@ -4,7 +4,7 @@ import { Card, CardImg, CardText, CardBody,
     CardTitle, CardSubtitle,FormGroup,Row,Col,Input,Label,Breadcrumb,BreadcrumbItem,Button,
 } from 'reactstrap';
     
-function RenderCard({items,status,loading,DeleteStudent,DeactivateStudent,ActivateStudent}) {
+function RenderCard({items,status,loading,DeleteInstructor,DeactivateInstructor,ActivateInstructor}) {
     var data = "";
 
           if (loading) {
@@ -22,11 +22,11 @@ function RenderCard({items,status,loading,DeleteStudent,DeactivateStudent,Activa
                 <CardTitle>{item.fullname}</CardTitle>
             <CardSubtitle>{item.address}</CardSubtitle> 
             <CardText>
-            <Link to={`/admin/viewStudent/${item.st_id}`} className="btn btn-primary btn-md">View</Link>
-                                {status === "Deactivate" ? <React.Fragment> <Button type="button" onClick={(e) => DeactivateStudent(e, item.st_id)} className='btn btn-md btn-danger m-1'>{status}</Button>
-            <Link to={`/admin/editStudent/${item.st_id}`} className="btn btn-success btn-md">Edit</Link> </React.Fragment>
-                                    : <React.Fragment><Button type="button" onClick={(e) => ActivateStudent(e, item.st_id)} className='btn btn-success m-1'>{status}</Button>
-                                        <Button type="button" onClick={(e) => DeleteStudent(e, item.st_id)} className='btn btn-danger'>Delete</Button> </React.Fragment>}
+            <Link to={`/admin/viewInstructor/${item.i_id}`} className="btn btn-primary btn-md">View</Link>
+                                {status === "Deactivate" ? <React.Fragment> <Button type="button" onClick={(e) => DeactivateInstructor(e, item.i_id)} className='btn btn-md btn-danger m-1'>{status}</Button>
+            <Link to={`/admin/editInstructor/${item.i_id}`} className="btn btn-success btn-md">Edit</Link> </React.Fragment>
+                                    : <React.Fragment><Button type="button" onClick={(e) => ActivateInstructor(e, item.i_id)} className='btn btn-success m-1'>{status}</Button>
+                                        <Button type="button" onClick={(e) => DeleteInstructor(e, item.i_id)} className='btn btn-danger'>Delete</Button> </React.Fragment>}
             </CardText>
             </CardBody>
                     </Card>
@@ -47,18 +47,18 @@ function RenderCard({items,status,loading,DeleteStudent,DeactivateStudent,Activa
 }
 
 
-function Student(props) {
+function Instructor(props) {
     
-    console.log(props.students)
+    console.log(props.instructors)
     return (
         <div className="container">
                  <Breadcrumb>
-                        <BreadcrumbItem><Link to="/studentList">Student List</Link></BreadcrumbItem>
-                            <BreadcrumbItem active>Student</BreadcrumbItem>
+                        <BreadcrumbItem><Link to="/instructorList">Instructor List</Link></BreadcrumbItem>
+                            <BreadcrumbItem active>Instructor</BreadcrumbItem>
                     </Breadcrumb>
             <div className="row align-items">
                 <div className="col-6 col-md m-1">
-                    <Link to={'addStudent'} className="btn btn-primary btn sm">Add Student</Link>
+                    <Link to={'addInstructor'} className="btn btn-primary btn sm">Add Instructor</Link>
                       
                 </div>
                        <div className="col-6 col-md m-1">
@@ -67,7 +67,7 @@ function Student(props) {
 						type="text"
 						value=""
 						id="search-input"
-						placeholder="Search Student..."
+						placeholder="Search Instructor..."
 					/>
 					<i className="fa fa-search search-icon"/>
 				</label>
@@ -75,11 +75,11 @@ function Student(props) {
             </div>
             <div className="row align-items">
                
-                <RenderCard items={props.students} status={props.status} loading={props.loading} DeleteStudent={props.DeleteStudent} DeactivateStudent={props.DeactivateStudent} ActivateStudent={props.ActivateStudent}/>
+                <RenderCard items={props.instructors} status={props.status} loading={props.loading} DeleteInstructor={props.DeleteInstructor} DeactivateInstructor={props.DeactivateInstructor} ActivateInstructor={props.ActivateInstructor}/>
             </div>
         </div>
     );
     }
 
  
-export default Student;
+export default Instructor;
