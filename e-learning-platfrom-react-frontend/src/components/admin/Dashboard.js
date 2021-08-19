@@ -58,7 +58,7 @@ function RenderDash() {
                 <CardTitle>Stuff</CardTitle>
             <CardSubtitle>Here You Can See All Stuff Information</CardSubtitle> 
                 <CardText>
-                 <Link to={"/stuff"} className="btn btn-primary btn-md mt-2">View</Link>
+                 <Link to={"/admin/stuff"} className="btn btn-primary btn-md mt-2">View</Link>
             </CardText>
             </CardBody>
                     </Card>

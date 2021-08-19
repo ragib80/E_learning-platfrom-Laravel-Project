@@ -6,11 +6,13 @@ import Contact from './ContactComponent';
 import { Switch, Route, Redirect,useParams,useLocation, useHistory } from 'react-router-dom';
 import About from "./AboutComponent";
 import Course from "./Course";
+import Stuff from "./Stuff";
 import ViewCourse from './ViewCourse';
 import ViewStudent from './ViewStudent';
 import ViewInstructor from './ViewInstructor';
 import AddInstructor from "./AddInstructor";
 import AddStudent from "./AddStudent";
+import AddStuff from "./AddStuff";
 import axios from "axios";
 import Student from './Student';
 import Instructor from './Instructor';
@@ -27,6 +29,7 @@ function Main(){
     const [courses, setCourses] = useState([]);
     const [leaders, setLeaders] = useState(LEADERS);
     const [students, setStudents] = useState([]);
+    const [stuffs, setStuffs] = useState([]);
     const [instructors, setInstructors] = useState([]);
     const [scholarships, setScholarship] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -51,6 +54,11 @@ function Main(){
             setStudents(response.data.students);
             setLoading(false);
         });
+        const loadStuff = () => axios.get('http://localhost:8000/api/admin/stuff/list')
+        .then(response => {
+            setStuffs(response.data.stuffs);
+            setLoading(false);
+        });
         const loadInstructor = () => axios.get('http://localhost:8000/api/admin/instructor/list')
         .then(response => {
             setInstructors(response.data.instructors);
@@ -70,6 +78,7 @@ function Main(){
             setLoading(false);
         });
             loadStudent();
+            loadStuff();
             loadInstructor();
             loadScholarship();
             loadCourse();
@@ -103,6 +112,11 @@ function Main(){
             <AddStudent students={students.filter((student) => student.st_id === parseInt(match.params.id,10))[0]} />
             );
     };
+    const EditStuff = ({ match }) => {
+        return(
+            <AddStuff students={stuffs.filter((stuff) => stuff.stf_id === parseInt(match.params.id,10))[0]} />
+            );
+    };
     const EditInstructor = ({ match }) => {
         return(
             <AddInstructor instructors={instructors.filter((instructor) => instructor.i_id === parseInt(match.params.id,10))[0]} />
@@ -117,6 +131,13 @@ function Main(){
         return(
             <ViewStudent students={students.filter((student) => student.st_id === parseInt(match.params.id, 10))[0]} loading={loading}
             courses={courses.filter((course) => course.c_id === parseInt(match.params.id,10))[0]}/>
+
+            );
+    };
+    const viewStuff = ({ match }) => {
+        return(
+            <ViewStudent students={stuffs.filter((stuff) => stuff.stf_id === parseInt(match.params.id, 10))[0]} loading={loading}
+               />
 
             );
     };
@@ -135,6 +156,17 @@ function Main(){
         if (res.data.status === 200) {
             
             history.push('/studentList');
+
+        }
+    }
+    const DeleteStuff = async (e, id) => {
+        const clicked = e.currentTarget;
+        clicked.innerText = "Deleting...";
+        const res = await axios.post(`http://localhost:8000/api/admin/stuff/delete/${id}`);
+
+        if (res.data.status === 200) {
+            
+            history.push('/admin/stuff');
 
         }
     }
@@ -306,13 +338,15 @@ const DeactivateStudent = async (e, id) => {
                 <Route path="/admin/active-instructor" component={viewActiveInstructor} />
                 <Route path="/admin/deactive-instructor" component={viewDeactiveInstructor} />
                 <Route path="/admin/student" component={() => <Student students={students} loading={loading} DeleteStudent={DeleteStudent}/>}  />
-                {/* <Route exact path="/editCourse/:id"  component={EditId} /> */}
+                <Route path="/admin/stuff" component={() => <Stuff stuffs={stuffs} loading={loading} DeleteStuff={DeleteStuff}/>}  />
                 <Route exact path="/admin/viewCourse/:id" component={viewCourse}/>
-                <Route  exact path="/admin/viewStudent/:id" component={viewStudent}/>
-                <Route  exact path="/admin/viewInstructor/:id" component={viewInstructor}/>
+                <Route exact path="/admin/viewStudent/:id" component={viewStudent}/>
+                <Route exact path="/admin/viewStuff/:id" component={viewStuff}/>
+                <Route exact path="/admin/viewInstructor/:id" component={viewInstructor}/>
                 <Route exact path="/admin/editStudent/:id"  component={EditStudent} />
+                <Route exact path="/admin/editStuff/:id"  component={EditStuff} />
                 <Route exact path="/admin/editInstructor/:id"  component={EditInstructor} />
-                <Route exact path="/admin/addStudent"  component={() => <AddStudent />}/>
+                <Route exact path="/admin/addStuff"  component={() => <AddStuff />}/>
                 <Route path="/dashboard"  component={() => <Dashboard/>}/>
                 <Route path="/aboutus" component={() => <About students={leaders.filter((student) => student.id !== 0)} instructors={leaders.filter((instructor) => instructor.id === 0)} loading={loading}/>}/>
                 <Route path="/courseList"  component={() => <CourseList/>}/>

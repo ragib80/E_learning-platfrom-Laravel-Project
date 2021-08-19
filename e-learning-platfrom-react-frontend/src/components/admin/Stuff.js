@@ -4,7 +4,7 @@ import { Card, CardImg, CardText, CardBody,
     CardTitle, CardSubtitle,FormGroup,Row,Col,Input,Label,Breadcrumb,BreadcrumbItem,Button,
 } from 'reactstrap';
     
-function RenderCard({items,status,loading,DeleteInstructor,DeactivateInstructor,ActivateInstructor}) {
+function RenderCard({items,loading,DeleteStuff}) {
     var data = "";
 
           if (loading) {
@@ -22,11 +22,9 @@ function RenderCard({items,status,loading,DeleteInstructor,DeactivateInstructor,
                 <CardTitle>{item.fullname}</CardTitle>
             <CardSubtitle>{item.address}</CardSubtitle> 
             <CardText>
-            <Link to={`/admin/viewInstructor/${item.i_id}`} className="btn btn-primary btn-md">View</Link>
-                                {status === "Deactivate" ? <React.Fragment> <Button type="button" onClick={(e) => DeactivateInstructor(e, item.i_id)} className='btn btn-md btn-danger m-1'>{status}</Button>
-            <Link to={`/admin/editInstructor/${item.i_id}`} className="btn btn-success btn-md">Edit</Link> </React.Fragment>
-                                    : <React.Fragment><Button type="button" onClick={(e) => ActivateInstructor(e, item.i_id)} className='btn btn-success m-1'>{status}</Button>
-                                        <Button type="button" onClick={(e) => DeleteInstructor(e, item.i_id)} className='btn btn-danger'>Delete</Button> </React.Fragment>}
+            <Link to={`/admin/viewStuff/${item.stf_id}`} className="btn btn-primary btn-md">View</Link>
+            <Link to={`/admin/editStuff/${item.stf_id}`} className="btn btn-success btn-md">Edit</Link> 
+            <Button type="button" onClick={(e) => DeleteStuff(e, item.stf_id)} className='btn btn-danger'>Delete</Button>
             </CardText>
             </CardBody>
                     </Card>
@@ -47,35 +45,38 @@ function RenderCard({items,status,loading,DeleteInstructor,DeactivateInstructor,
 }
 
 
-function Instructor(props) {
+function Stuff(props) {
     
-    console.log(props.instructors)
+    console.log(props.stuffs)
     return (
         <div className="container">
                  <Breadcrumb>
-                        <BreadcrumbItem><Link to="/instructorList">Instructor List</Link></BreadcrumbItem>
-                            <BreadcrumbItem active>Instructor</BreadcrumbItem>
+                        <BreadcrumbItem><Link to="/stuffList">Stuff List</Link></BreadcrumbItem>
+                            <BreadcrumbItem active>Stuff</BreadcrumbItem>
                     </Breadcrumb>
             <div className="row align-items">
+                <div className="col-6 col-md m-1">
+                    <Link to={'addStuff'} className="btn btn-primary btn sm">Add Stuff</Link>
+                      
+                </div>
                        <div className="col-6 col-md m-1">
                     <label className="search-label" htmlFor="search-input">
 					<input
 						type="text"
 						value=""
 						id="search-input"
-						placeholder="Search Instructor..."
+						placeholder="Search Stuff..."
 					/>
 					<i className="fa fa-search search-icon"/>
 				</label>
                 </div>
             </div>
             <div className="row align-items">
-               
-                <RenderCard items={props.instructors} status={props.status} loading={props.loading} DeleteInstructor={props.DeleteInstructor} DeactivateInstructor={props.DeactivateInstructor} ActivateInstructor={props.ActivateInstructor}/>
+                <RenderCard items={props.stuffs} loading={props.loading} DeleteStuff={props.DeleteStuff}/>
             </div>
         </div>
     );
     }
 
  
-export default Instructor;
+export default Stuff;

@@ -11,7 +11,7 @@ function RenderCard() {
         <div className="col-12 col-md-4">
                 
             <Card className="m-3 p-2">
-                <CardImg width="100%" src="assets/images/instructor-active.png" alt="active instructor" />
+                <CardImg width="100%" src="assets/images/instructor-active.jpg" alt="active instructor" />
                 <CardBody>
                     <CardTitle>Active Instructors</CardTitle>
                     <CardSubtitle>Here You Can See All Active Instructors</CardSubtitle>
@@ -24,7 +24,7 @@ function RenderCard() {
             <div className="col-12 col-md-4">
                 
             <Card className="m-3 p-2">
-                <CardImg width="100%" src="assets/images/instructor-deactive.png" alt="deactive instructor" />
+                <CardImg width="100%" src="assets/images/instructor-deactive.jpg" alt="deactive instructor" />
                 <CardBody>
                     <CardTitle>Deactive Instructors</CardTitle>
                     <CardSubtitle>Here You Can See All Deactive Instructors</CardSubtitle>

@@ -412,12 +412,20 @@ class AdminController extends Controller
     public function listStuff()
     {
         $stuffs = Stuff::all();
-        return view('admin.stuff.list')->with('stuffs', $stuffs);
+        return response()->json([
+            'status' => 200,
+            'stuffs' =>   $stuffs
+
+        ]);
     }
     public function detailsStuff($id)
     {
         $stuffs = Stuff::find($id);
-        return view('admin.stuff.details')->with('stuff', $stuffs);
+        return response()->json([
+            'status' => 200,
+            'stuffs' =>   $stuffs
+
+        ]);
     }
 
     public function editStuff($id)
@@ -437,8 +445,11 @@ class AdminController extends Controller
         $stuff->address = $req->address;
         // $user->type = $req->type;
         $stuff->save();
-        return redirect()->route('stuff.list');
-        // return view('user.list')->with('userList', $users);
+        return response()->json([
+            'status' => 200,
+            'stuffs' =>   $stuff
+
+        ]);
     }
     public function deleteStuff($id)
     {
@@ -452,7 +463,11 @@ class AdminController extends Controller
     {
 
         Stuff::destroy($id);
-        return redirect()->route('stuff.list');
+        return response()->json([
+            'status' => 200,
+            'message' =>   "Delete Success"
+
+        ]);
     }
 
 
