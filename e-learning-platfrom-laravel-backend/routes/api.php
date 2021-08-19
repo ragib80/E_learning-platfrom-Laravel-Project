@@ -77,6 +77,10 @@ Route::post('/admin/instructor/deactivate/{id}', 'AdminController@deactivateInst
 
 Route::post('/files', 'AdminController@data');
 
+Route::get('/admin/student/details/{id}/course/{cid}', [
+    'as' => 'student.course.details',
+    'uses' => 'AdminController@detailsStudent'
+]);
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });

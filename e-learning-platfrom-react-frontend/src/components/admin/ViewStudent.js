@@ -1,12 +1,12 @@
 import React, { useState} from 'react';
 import { Card, CardImg, CardText, CardBody,CardImgOverlay,
-    CardTitle, Breadcrumb, BreadcrumbItem,  Button, Modal, ModalHeader, ModalBody,
+    CardTitle, Breadcrumb, BreadcrumbItem,  Button, Modal, ModalHeader, ModalBody,CardSubtitle,
     Form, FormGroup, Input, Label,Col } from 'reactstrap';
 import { Link,useHistory } from 'react-router-dom';
 import axios from 'axios';
 import { FadeTransform, Fade, Stagger } from 'react-animation-components';
 
-function RenderStudent({ student,loading}) {
+function RenderStudent({ student,loading,items}) {
       if (loading) {
            return <img width="100%" src="assets/images/loading.gif" alt="loading"/>
         }
@@ -24,7 +24,7 @@ function RenderStudent({ student,loading}) {
                     </div>                
                 </div>
                 <div className="row">
-                        <div className='col-12 col-md-5 m-1'>
+                    <div className='col-12 col-md-3 m-1'>
                                         <FadeTransform in transformProps={{
                     exitTransform: 'scale(0.5) translateY(-50%)'
                 }}>
@@ -32,7 +32,7 @@ function RenderStudent({ student,loading}) {
                                 </FadeTransform>
                         </div>
                         <div className='col-12 col-md-5 m-1'>
-                                <Stagger in>
+                            <Stagger in>
                                 <CardBody>
                                     <Fade in>
                                 <CardTitle>{student.fullname}</CardTitle>
@@ -57,13 +57,51 @@ function RenderStudent({ student,loading}) {
             return (<div></div>)
         }
     }
+function RenderCourse({items,loading}) {
+    var data = "";
+
+          if (loading) {
+            data =  <div className="col-12 col-md-3"> <img width="100%" src="assets/images/loading.gif" alt="loading" /></div>
+
+        }
+        else {
+            return (
+                data =
+                <React.Fragment>
+              <div className="col-12 col-md-3 mt-5">
+                   <h4>Enrolled Course</h4>
+                   <Card className="m-3">
+               <CardImg width="100%" src={items.image} alt={items.c_name} />
+            <CardBody>
+                <CardTitle>{items.c_name}</CardTitle>
+            <CardSubtitle>{items.type}</CardSubtitle> 
+            <CardText>
+            </CardText>
+            </CardBody>
+                    </Card>
+                    </div>
+                    </React.Fragment>);
+ 
+      
+    }
+
+    return (
+        <div className="container">
+            <div className="row">
+                    {data}
+            </div>
+        </div>
+        
+    )
+
+}
 
 const ViewStudent = (props) => {
 
     const student = props.students;
-    const loading = props.loading
-    console.log(student);
-
+    const [courses,setCourses] = useState(props.courses);
+    const loading = props.loading;
+    console.log(props.courses);
   
     const studentItem = <RenderStudent student={student} loading={loading} />
         
@@ -75,7 +113,9 @@ const ViewStudent = (props) => {
 
                 <div className='row'>
                    {studentItem}
+            <RenderCourse items={props.courses} loading={loading}/>
             </div>
+
             </div>
             )
         }

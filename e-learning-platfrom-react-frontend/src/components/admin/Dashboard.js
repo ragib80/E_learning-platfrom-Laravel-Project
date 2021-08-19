@@ -118,7 +118,10 @@ function RenderDash() {
 const Dashboard = () => {
 
     
-       
+    const rememberMe = localStorage.getItem('rememberMe') === 'true';
+    const email = localStorage.getItem('email');
+
+    console.log(email);
     const dashItem = <RenderDash/>
         
             if (dashItem == null) {

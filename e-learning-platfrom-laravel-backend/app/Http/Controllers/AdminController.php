@@ -38,7 +38,7 @@ class AdminController extends Controller
 
     public function index()
     {
-        $students = Student::count();
+        $students = Student::count()->where("status");
         $instructors = Instructor::count();
         $stuffs = Stuff::count();
         $courses = Course::count();
@@ -77,12 +77,15 @@ class AdminController extends Controller
         ]);
     }
 
-    public function detailsStudent($id)
+    public function detailsStudent($id,$cid)
     {
         $students = Student::find($id);
+        $courses = Course::find($cid);
         return response()->json([
             'status' => 200,
-            'students' => $students
+            'students' => $students,
+            'students' => $courses
+
 
         ]);
     }
@@ -169,42 +172,41 @@ class AdminController extends Controller
 
     public function searchStudent(Request $request)
     {
-        if ($request->ajax()) {
-            $students =
-                Student::where('country', 'LIKE', $request->search . '%')->get();
+        // if ($request->ajax()) {
+            $students = Student::where('fullname', 'LIKE', $request->search . '%')->get();
 
-            $output =
-                '<tr class="table-info table-sm">' .
-                '<td>' . 'Student ID' . '</td>' .
-                '<td>' . 'Student Name' . '</td>' .
-                '<td>' . 'Student Email' . '</td>' .
-                '<td>' . 'Student Address' . '</td>' .
-                '<td>' . 'Action' . '</td>' .
+            // $output =
+            //     '<tr class="table-info table-sm">' .
+            //     '<td>' . 'Student ID' . '</td>' .
+            //     '<td>' . 'Student Name' . '</td>' .
+            //     '<td>' . 'Student Email' . '</td>' .
+            //     '<td>' . 'Student Address' . '</td>' .
+            //     '<td>' . 'Action' . '</td>' .
 
-                '</tr>';
+            //     '</tr>';
 
-            if (count($students) > 0) {
-                if ($students) {
-                    foreach ($students as $key => $student) {
-                        $output .= '<tr>' .
-                            '<td>' . $student->st_id . '</td>' .
-                            '<td>' . $student->fullname . '</td>' .
-                            '<td>' . $student->email . '</td>' .
-                            '<td>' . $student->address . '</td>' .
-                            '<td>' . '<a class="btn btn-info" href="' . route('student.details', ['id' => $student->st_id]) . '">Details</a>'  . '|'
-                            . '<a class="btn btn-warning" href="' . route('student.edit', ['id' => $student->st_id]) . '">Edit</a>'  . '|'
-                            . '<a class="btn btn-danger" href="' . route('student.delete', ['id' => $student->st_id]) . '">Delete</a>' . '</td>' . '|' .
-                            '</tr>';
-                    }
-                    return Response($output);
-                }
-            } else {
+            // if (count($students) > 0) {
+            //     if ($students) {
+            //         foreach ($students as $key => $student) {
+            //             $output .= '<tr>' .
+            //                 '<td>' . $student->st_id . '</td>' .
+            //                 '<td>' . $student->fullname . '</td>' .
+            //                 '<td>' . $student->email . '</td>' .
+            //                 '<td>' . $student->address . '</td>' .
+            //                 '<td>' . '<a class="btn btn-info" href="' . route('student.details', ['id' => $student->st_id]) . '">Details</a>'  . '|'
+            //                 . '<a class="btn btn-warning" href="' . route('student.edit', ['id' => $student->st_id]) . '">Edit</a>'  . '|'
+            //                 . '<a class="btn btn-danger" href="' . route('student.delete', ['id' => $student->st_id]) . '">Delete</a>' . '</td>' . '|' .
+            //                 '</tr>';
+            //         }
+            //         return Response($output);
+            //     }
+            // } else {
 
-                $output .=
-                    '<tr>' . '<td colspan="5">' . 'No results' . '</td>' . '</tr>';
-                return Response($output);
-            }
-        }
+            //     $output .=
+            //         '<tr>' . '<td colspan="5">' . 'No results' . '</td>' . '</tr>';
+            //     return Response($output);
+            // }
+        // }
     }
 
 

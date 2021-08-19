@@ -340,7 +340,7 @@ const DeactivateStudent = async (e, id) => {
                 <Route path="/admin/student" component={() => <Student students={students} loading={loading} DeleteStudent={DeleteStudent}/>}  />
                 <Route path="/admin/stuff" component={() => <Stuff stuffs={stuffs} loading={loading} DeleteStuff={DeleteStuff}/>}  />
                 <Route exact path="/admin/viewCourse/:id" component={viewCourse}/>
-                <Route exact path="/admin/viewStudent/:id" component={viewStudent}/>
+                <Route exact path="/admin/viewStudent/:id/:id" component={viewStudent}/>
                 <Route exact path="/admin/viewStuff/:id" component={viewStuff}/>
                 <Route exact path="/admin/viewInstructor/:id" component={viewInstructor}/>
                 <Route exact path="/admin/editStudent/:id"  component={EditStudent} />

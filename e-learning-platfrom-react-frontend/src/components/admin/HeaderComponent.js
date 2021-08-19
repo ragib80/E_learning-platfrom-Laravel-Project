@@ -16,7 +16,8 @@ class Header extends Component {
             isNavOpen: false,
             isModalOpen: false,
             isLoggedIn: false,
-            name: ""
+            email: "",
+            rememberMe: false
         };
       }
  
@@ -38,12 +39,16 @@ class Header extends Component {
         }
         this.toggleModal();
         const res = await axios.post('http://localhost:8000/api/login', $data);
-        
         if (res.data.status === 200) {
             this.setState({
                 isLoggedIn: !this.state.isLoggedIn,
-                name: $data.email
+                email: $data.email,
+                rememberMe: !this.state.rememberMe
+                
             })
+        const { email, rememberMe } = this.state;
+        localStorage.setItem('rememberMe', rememberMe);
+        localStorage.setItem('email', rememberMe ? email : '');
         }
         else {
             console.log("error");
@@ -51,16 +56,21 @@ class Header extends Component {
 
     }
     
+    componentDidMount() {
+  const rememberMe = localStorage.getItem('rememberMe') === 'true';
+  const user = rememberMe ? localStorage.getItem('user') : '';
+  this.setState({ user, rememberMe });
+}
      
     login(){
-        console.log(this.state.name)
+        console.log(this.state.email)
         console.log(this.state.isLoggedIn);
         const isLoggedIn = this.state.isLoggedIn;
         if (isLoggedIn) {
             return (
                   <Nav className="ml-auto" navbar>
                        <div className="badge bg-primary text-wrap text-white">
-                        Hi,{this.state.name}
+                        Hi,{this.state.email}
 </div>
                     <NavItem>
                         <Button onClick={this.toggleModal} color="white" className="btn btn-log"><span className="fa fa-sign-out fa-lg"></span>Logout</Button>
@@ -112,7 +122,7 @@ class Header extends Component {
                     <ModalBody>
                       <Form onSubmit={this.handleLogin}>
                             <FormGroup>
-                                <Label htmlFor="email">Username</Label>
+                                <Label htmlFor="email">Email</Label>
                                 <Input type="text" id="email" name="email"
                                     innerRef={(input) => this.email = input} />
                             </FormGroup>
@@ -123,8 +133,8 @@ class Header extends Component {
                             </FormGroup>
                             <FormGroup check>
                                 <Label check>
-                                    <Input type="checkbox" name="remember"
-                                    innerRef={(input) => this.remember = input}  />
+                                    <Input type="checkbox" name="rememberMe"
+                                    innerRef={(input) => this.rememberMe = input}  />
                                     Remember me
                                 </Label>
                             </FormGroup>
