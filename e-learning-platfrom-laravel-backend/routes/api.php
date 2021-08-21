@@ -1,4 +1,16 @@
 <?php
+use App\Http\Controllers\Admin\LoginController;
+use App\Http\Controllers\Admin\DashBoardController;
+use App\Http\Controllers\Admin\HomeController;
+use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\LogoutController;
+
+use App\Http\Controllers\Instructor\LoginController;
+use App\Http\Controllers\Instructor\CourseController;
+use App\Http\Controllers\Instructor\NoteController;
+use App\Http\Controllers\Instructor\QuizController;
+use App\Http\Controllers\Instructor\QuestionController;
+use App\Http\Controllers\Instructor\RegistrationController;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -13,7 +25,7 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-
+//Admin
 Route::post('/login', 'LoginController@verify');
 
 Route::get('/student', 'StudentController@index')->name('student.index');
@@ -81,6 +93,34 @@ Route::get('/admin/student/details/{id}/course/{cid}', [
     'as' => 'student.course.details',
     'uses' => 'AdminController@detailsStudent'
 ]);
+
+
+//Instructor
+
+Route::post("/login",[LoginController::class,'login']);
+
+Route::get('/instructor-index',[CourseController::class, 'index']);
+Route::post('/course-add',[CourseController::class, 'insert']);
+Route::put("/edit-course/update/{c_id}",[CourseController::class,'update']);
+Route::get('/course-info/{c_id}',[CourseController::class, 'details']);
+Route::delete('/course-delete/{c_id}', [CourseController::class, 'destroy']);
+Route::get("/course-search/{keyword}",[CourseController::class,'searchCourse']);
+
+Route::post('/files',[NoteController::class,'uploadfile']);
+Route::get('/files/view',[NoteController::class,'view']);
+Route::get('/files/download/{file}',[NoteController::class, 'download']);
+Route::get('/View/file/{id}',[NoteController::class,'show']);
+
+Route::post('/quizes-create',[QuizController::class,'store']);
+Route::get('/quizes-view',[QuizController::class,'create']);
+Route::get('/quizes/addquestion/{id}',[QuizController::class,'AddQuestion']);
+Route::post('/addquestions/{id}',[QuestionController::class,'store']);
+Route::post('/registration',[RegistrationController::class,'verify']);
+
+Route::get('/quizes/{id}',[QuizController::class,'show']);
+
+
+
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
