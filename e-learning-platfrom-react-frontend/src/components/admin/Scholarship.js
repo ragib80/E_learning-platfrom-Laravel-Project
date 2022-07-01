@@ -5,7 +5,7 @@ import { Card, CardImg, CardText, CardBody,
 } from 'reactstrap';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
-function RenderRow({items,modal,loading,AcceptScholarship,RejectScholarship,toggleModal,isModalOpen,setModalIsOpenToFalse,}) {
+function RenderRow({items,modal,loading,AcceptScholarship,RejectScholarship,toggleModal,isModalOpen,setModalIsOpenToFalse}) {
     var data = "";
 
           if (loading) {

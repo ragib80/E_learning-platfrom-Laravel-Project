@@ -47,8 +47,8 @@ function RenderCard({items,loading,status,DeleteCourse,DeactivateCourse,Activate
 }
 
 function Course(props) {
-    
-    console.log(props.courses)
+     const [courses, setCourses] = React.useState(props.courses);
+    console.log(courses)
     return (
         <div className="container">
             <div className="row align-items-start">
@@ -56,7 +56,7 @@ function Course(props) {
                         <BreadcrumbItem><Link to="/courseList">Course List</Link></BreadcrumbItem>
                             <BreadcrumbItem active>Course</BreadcrumbItem>
                     </Breadcrumb>
-                <RenderCard items={props.courses} loading={props.loading} status={props.status} DeleteCourse={props.DeleteCourse}  DeactivateCourse={props.DeactivateCourse} ActivateCourse={props.ActivateCourse}/>
+                <RenderCard items={courses} loading={props.loading} status={props.status} DeleteCourse={props.DeleteCourse}  DeactivateCourse={props.DeactivateCourse} ActivateCourse={props.ActivateCourse}/>
             </div>
         </div>
     );

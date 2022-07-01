@@ -47,8 +47,8 @@ class Header extends Component {
                 
             })
         const { email, rememberMe } = this.state;
-        localStorage.setItem('rememberMe', rememberMe);
-        localStorage.setItem('email', rememberMe ? email : '');
+        localStorage.setItem('rememberMe', 'true');
+        localStorage.setItem('email', 'true');
         }
         else {
             console.log("error");
@@ -57,15 +57,18 @@ class Header extends Component {
     }
     
     componentDidMount() {
-  const rememberMe = localStorage.getItem('rememberMe') === 'true';
-  const user = rememberMe ? localStorage.getItem('user') : '';
-  this.setState({ user, rememberMe });
+        // const rememberMe = localStorage.getItem('rememberMe') === 'true';
+        const email = localStorage.getItem('email');
+        const rememberMe = localStorage.getItem('rememberMe');
+  const user = rememberMe ? JSON.parse(localStorage.getItem('user')) : '';
+        this.setState({ user, rememberMe });
+        email && this.setState({ email });
 }
      
     login(){
         console.log(this.state.email)
         console.log(this.state.isLoggedIn);
-        const isLoggedIn = this.state.isLoggedIn;
+        const isLoggedIn = this.state.rememberMe;
         if (isLoggedIn) {
             return (
                   <Nav className="ml-auto" navbar>

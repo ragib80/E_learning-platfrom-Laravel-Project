@@ -38,7 +38,7 @@ class AdminController extends Controller
 
     public function index()
     {
-        $students = Student::count()->where("status");
+        $students = Student::count();
         $instructors = Instructor::count();
         $stuffs = Stuff::count();
         $courses = Course::count();

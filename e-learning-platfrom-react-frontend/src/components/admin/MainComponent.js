@@ -114,7 +114,7 @@ function Main(){
     };
     const EditStuff = ({ match }) => {
         return(
-            <AddStuff students={stuffs.filter((stuff) => stuff.stf_id === parseInt(match.params.id,10))[0]} />
+            <AddStuff stuff={stuffs.filter((stuff) => stuff.stf_id === parseInt(match.params.id,10))[0]} />
             );
     };
     const EditInstructor = ({ match }) => {
@@ -184,13 +184,15 @@ function Main(){
     const DeactivateCourse = async (e, id) => {
         const clicked = e.currentTarget;
         clicked.innerText = "Deactivating...";
+        
         const res = await axios.post(`http://localhost:8000/api/admin/course/deactivate/${id}`);
-
+        
         if (res.data.status === 200) {
-            
-            history.push('/courseList');
+           
+            history.push({pathname:'/admin/active-course'});
 
         }
+        
     }
     const ActivateCourse = async (e, id) => {
         const clicked = e.currentTarget;
@@ -199,7 +201,7 @@ function Main(){
 
         if (res.data.status === 200) {
             
-            history.push('/courseList');
+            history.push('/admin/deactive-course');
 
         }
     }
